@@ -1,54 +1,56 @@
-
-<div x-data="{sidebarCollapse:false , open: false}" @keydown.window.escape="open = false">
-  <div
-  x-show="open"
-  class="relative z-40 md:hidden"
-  x-description="Off-canvas menu for mobile, show/hide based on off-canvas menu state."
-  x-ref="dialog"
-  aria-modal="true"
+<div
+  x-data="{sidebarCollapse:false , open: false}"
+  @keydown.window.escape="open = false"
 >
   <div
     x-show="open"
-    x-transition:enter="transition-opacity ease-linear duration-300"
-    x-transition:enter-start="opacity-0"
-    x-transition:enter-end="opacity-100"
-    x-transition:leave="transition-opacity ease-linear duration-300"
-    x-transition:leave-start="opacity-100"
-    x-transition:leave-end="opacity-0"
-    class="fixed inset-0 bg-gray-600 bg-opacity-75"
-    x-description="Off-canvas menu backdrop, show/hide based on off-canvas menu state."
-  ></div>
-
-  <div class="fixed inset-0 z-40 flex">
+    class="relative z-40 md:hidden"
+    x-description="Off-canvas menu for mobile, show/hide based on off-canvas menu state."
+    x-ref="dialog"
+    aria-modal="true"
+  >
     <div
       x-show="open"
-      x-transition:enter="transition ease-in-out duration-300 transform"
-      x-transition:enter-start="-translate-x-full"
-      x-transition:enter-end="translate-x-0"
-      x-transition:leave="transition ease-in-out duration-300 transform"
-      x-transition:leave-start="translate-x-0"
-      x-transition:leave-end="-translate-x-full"
-      x-description="Off-canvas menu, show/hide based on off-canvas menu state."
-      class="relative flex w-full max-w-xs flex-1 flex-col bg-gray-800 pt-5 pb-4"
-      @click.away="open = false"
-    >
+      x-transition:enter="transition-opacity ease-linear duration-300"
+      x-transition:enter-start="opacity-0"
+      x-transition:enter-end="opacity-100"
+      x-transition:leave="transition-opacity ease-linear duration-300"
+      x-transition:leave-start="opacity-100"
+      x-transition:leave-end="opacity-0"
+      class="fixed inset-0 bg-gray-600 bg-opacity-75"
+      x-description="Off-canvas menu backdrop, show/hide based on off-canvas menu state."
+    ></div>
+
+    <div class="fixed inset-0 z-40 flex">
       <div
         x-show="open"
-        x-transition:enter="ease-in-out duration-300"
-        x-transition:enter-start="opacity-0"
-        x-transition:enter-end="opacity-100"
-        x-transition:leave="ease-in-out duration-300"
-        x-transition:leave-start="opacity-100"
-        x-transition:leave-end="opacity-0"
-        x-description="Close button, show/hide based on off-canvas menu state."
-        class="absolute top-0 right-0 -mr-12 pt-2"
+        x-transition:enter="transition ease-in-out duration-300 transform"
+        x-transition:enter-start="-translate-x-full"
+        x-transition:enter-end="translate-x-0"
+        x-transition:leave="transition ease-in-out duration-300 transform"
+        x-transition:leave-start="translate-x-0"
+        x-transition:leave-end="-translate-x-full"
+        x-description="Off-canvas menu, show/hide based on off-canvas menu state."
+        class="relative flex w-full max-w-xs flex-1 flex-col bg-gray-800 pt-5 pb-4"
+        @click.away="open = false"
       >
-        <button
-          type="button"
-          class="ml-1 flex h-10 w-10 items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-          @click="open = false"
+        <div
+          x-show="open"
+          x-transition:enter="ease-in-out duration-300"
+          x-transition:enter-start="opacity-0"
+          x-transition:enter-end="opacity-100"
+          x-transition:leave="ease-in-out duration-300"
+          x-transition:leave-start="opacity-100"
+          x-transition:leave-end="opacity-0"
+          x-description="Close button, show/hide based on off-canvas menu state."
+          class="absolute top-0 right-0 -mr-12 pt-2"
         >
-          <span class="sr-only">Close sidebar</span>
+          <button
+            type="button"
+            class="ml-1 flex h-10 w-10 items-center justify-center rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+            @click="open = false"
+          >
+            <span class="sr-only">Close sidebar</span>
             <!-- Heroicon name: outline/x-mark -->
             <svg
               class="h-6 w-6 text-white"
@@ -327,11 +329,6 @@
             href="#"
             class="bg-gray-900 text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md"
           >
-            <!--
-              Heroicon name: outline/home
-
-              Current: "text-gray-300", Default: "text-gray-400 group-hover:text-gray-300"
-            -->
             <svg
               class="text-gray-300 mr-3 flex-shrink-0 h-6 w-6"
               xmlns="http://www.w3.org/2000/svg"
@@ -347,8 +344,40 @@
                 d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
               />
             </svg>
-            <span :class=" {'hidden' : !sidebarCollapse}">Home</span>
-            <span class="transform translate-x-12 text-black rounded-md px-2 py-1 shadow-md absolute z-20 opacity-0 group-hover:opacity-100" :class=" {'hidden' : sidebarCollapse}">Home</span>
+            <span :class=" {'hidden' : !sidebarCollapse}">Accueil</span>
+            <span
+              class="transform translate-x-12 text-black rounded-md px-2 py-1 shadow-md absolute z-20 opacity-0 group-hover:opacity-100"
+              :class=" {'hidden' : sidebarCollapse}"
+              >Accueil</span
+            >
+          </a>
+          <a
+            href="#"
+            class="text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+          >
+            <!-- Heroicon name: outline/chart-bar -->
+            <svg
+              class="text-gray-400 group-hover:text-gray-300 mr-3 flex-shrink-0 h-6 w-6"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"
+              />
+            </svg>
+            <span :class=" {'hidden' : !sidebarCollapse}"> Analytique</span>
+            <span
+              class="transform translate-x-14 text-black rounded-md px-2 py-1 shadow-md absolute z-20 opacity-0 group-hover:opacity-100"
+              :class=" {'hidden' : sidebarCollapse}"
+            >
+              Analytique</span
+            >
           </a>
 
           <a
@@ -371,8 +400,31 @@
                 d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"
               />
             </svg>
-            <span :class=" {'hidden' : !sidebarCollapse}">Team</span>
-            <span class="transform translate-x-14 text-black rounded-md px-2 py-1 shadow-md absolute z-20 opacity-0 group-hover:opacity-100" :class=" {'hidden' : sidebarCollapse}">Team</span>
+            <span :class=" {'hidden' : !sidebarCollapse}">Contacts</span>
+            <svg
+              fill="#ffffff"
+              class="h-6 w-6 relative left-15 "
+              viewBox="0 0 1024 1024"
+              xmlns="http://www.w3.org/2000/svg"
+              stroke="#ffffff"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M419.3 264.8l-61.8 61.8L542.9 512 357.5 697.4l61.8 61.8L666.5 512z"
+                ></path>
+              </g>
+            </svg>
+            <span
+              class="transform translate-x-14 text-black rounded-md px-2 py-1 shadow-md absolute z-20 opacity-0 group-hover:opacity-100"
+              :class=" {'hidden' : sidebarCollapse}"
+              >Team</span
+            >
           </a>
 
           <a
@@ -396,7 +448,11 @@
               />
             </svg>
             <span :class=" {'hidden' : !sidebarCollapse}">Projects</span>
-            <span class="transform translate-x-14 text-black rounded-md px-2 py-1 shadow-md absolute z-20 opacity-0 group-hover:opacity-100" :class=" {'hidden' : sidebarCollapse}">Projects</span>
+            <span
+              class="transform translate-x-14 text-black rounded-md px-2 py-1 shadow-md absolute z-20 opacity-0 group-hover:opacity-100"
+              :class=" {'hidden' : sidebarCollapse}"
+              >Projects</span
+            >
           </a>
 
           <a
@@ -420,7 +476,11 @@
               />
             </svg>
             <span :class=" {'hidden' : !sidebarCollapse}">Calendar</span>
-            <span class="transform translate-x-14 text-black rounded-md px-2 py-1 shadow-md absolute z-20 opacity-0 group-hover:opacity-100" :class=" {'hidden' : sidebarCollapse}">Calendar</span>
+            <span
+              class="transform translate-x-14 text-black rounded-md px-2 py-1 shadow-md absolute z-20 opacity-0 group-hover:opacity-100"
+              :class=" {'hidden' : sidebarCollapse}"
+              >Calendar</span
+            >
           </a>
 
           <a
@@ -444,31 +504,11 @@
               />
             </svg>
             <span :class=" {'hidden' : !sidebarCollapse}">Documents</span>
-            <span class="transform translate-x-14 text-black rounded-md px-2 py-1 shadow-md absolute z-20 opacity-0 group-hover:opacity-100" :class=" {'hidden' : sidebarCollapse}">Documents</span>
-          </a>
-
-          <a
-            href="#"
-            class="text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md"
-          >
-            <!-- Heroicon name: outline/chart-bar -->
-            <svg
-              class="text-gray-400 group-hover:text-gray-300 mr-3 flex-shrink-0 h-6 w-6"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              aria-hidden="true"
+            <span
+              class="transform translate-x-14 text-black rounded-md px-2 py-1 shadow-md absolute z-20 opacity-0 group-hover:opacity-100"
+              :class=" {'hidden' : sidebarCollapse}"
+              >Documents</span
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"
-              />
-            </svg>
-            <span :class=" {'hidden' : !sidebarCollapse}">Dashboard</span>
-            <span class="transform translate-x-14 text-black rounded-md px-2 py-1 shadow-md absolute z-20 opacity-0 group-hover:opacity-100" :class=" {'hidden' : sidebarCollapse}">Dashboard</span>
           </a>
         </nav>
       </div>
@@ -478,7 +518,6 @@
     :class=" { 'md:pl-[3.5rem]': !sidebarCollapse }"
     class="flex flex-col md:pl-64 -transitionall duration-300"
   >
-    
     <div class="sticky top-0 z-10 flex h-16 flex-shrink-0 bg-white shadow">
       <button
         type="button"
@@ -504,12 +543,26 @@
         </svg>
       </button>
       <div class="flex flex-1 justify-end px-4">
-        
         <div class="ml-4 flex items-center md:ml-6">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="rgb(156 163 175)" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-          </svg>
-          
+          <button
+            class="p-1 rounded-full mx-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="rgb(156 163 175)"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
+              />
+            </svg>
+          </button>
+
           <button
             type="button"
             class="rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
@@ -552,17 +605,6 @@
                 />
               </button>
             </div>
-
-            <!--
-              Dropdown menu, show/hide based on menu state.
-
-              Entering: "transition ease-out duration-100"
-                From: "transform opacity-0 scale-95"
-                To: "transform opacity-100 scale-100"
-              Leaving: "transition ease-in duration-75"
-                From: "transform opacity-100 scale-100"
-                To: "transform opacity-0 scale-95"
-            -->
             <div
               x-show="userMenu"
               x-transition:enter="transition ease-out duration-300"
