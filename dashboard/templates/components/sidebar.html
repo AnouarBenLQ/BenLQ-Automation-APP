@@ -5,17 +5,13 @@
     this.subMenus[index] = !state;
     
  }}"
- 
-  
-  @keydown.window.escape="open = false"
->
+ @keydown.window.escape="open = false">
   <div
     x-show="open"
     class="relative z-40 md:hidden"
     x-description="Off-canvas menu for mobile, show/hide based on off-canvas menu state."
     x-ref="dialog"
-    aria-modal="true"
-  >
+    aria-modal="true">
     <div
       x-show="open"
       x-transition:enter="transition-opacity ease-linear duration-300"
@@ -268,8 +264,7 @@
   <!-- Static sidebar for desktop -->
   <div
     :class="{ 'md:w-[3.5rem]': !sidebarOpen }"
-    class="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col -transitionall duration-300"
-  >
+    class="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col -transitionall duration-300">
     <!-- Sidebar component, swap this element with another sidebar if you like -->
     <div class="flex min-h-0 flex-1 flex-col bg-gray-800">
       <div
@@ -1263,8 +1258,7 @@
   </div>
   <div
     :class=" { 'md:pl-[3.5rem]': !sidebarOpen }"
-    class="flex flex-col md:pl-64 -transitionall duration-300"
-  >
+    class="flex flex-col md:pl-64 -transitionall duration-300">
     <div class="sticky top-0 z-10 flex h-16 flex-shrink-0 bg-white shadow">
       <button
         type="button"
@@ -1402,8 +1396,8 @@
 
     <main class="flex-1">
       <div class="py-6">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
-          <h1 class="text-2xl font-semibold text-gray-900"></h1>
+        <div class="mx-auto max-w-7xl px-4 md:px-6">
+          <h1 class="text-2xl font-semibold text-gray-900">Dashboard</h1>
         </div>
         <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
           <!-- Replace with your content -->
