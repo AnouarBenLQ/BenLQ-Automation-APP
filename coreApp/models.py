@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
@@ -217,3 +218,53 @@ class Promotion(models.Model):
     class Meta:
         verbose_name = "Promotion"
         verbose_name_plural = "Promotions"
+
+
+class Devis(models.Model):
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='clients')
+    STATUS_CHOICES = [
+        ('encours', 'En cours'),
+        ('echu', 'Échu'),
+        ('valide', 'Validé'),
+    ]
+    status_devis = models.CharField(max_length=20, choices=STATUS_CHOICES, default='encours')
+    date = models.DateTimeField(auto_now_add=True)
+    echeance = models.DateTimeField(auto_now_add=True)
+    reference = models.CharField(max_length=50, unique=True)
+    document = models.FileField(upload_to='documents/')
+    montant_total_ttc = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    
+    def save(self, *args, **kwargs):
+        # Set default value for echeance 1 month later than the date
+        if not self.echeance:
+            self.echeance = self.date + timezone.timedelta(days=30)
+        self.montant_total_ttc = self.calculate_montant_total_ttc()
+
+        super().save(*args, **kwargs)
+    
+    def calculate_montant_total_ttc(self):
+        # Calculate the total TTC amount based on all related LigneDevis instances
+        lignes_devis = self.lignes_devis.all()
+        total_ttc = sum(ligne.montant_ttc for ligne in lignes_devis)
+        return total_ttc
+
+class LigneDevis(models.Model):
+    devis = models.ForeignKey(Devis, on_delete=models.CASCADE, related_name='lignes_devis')
+    designation = models.CharField(max_length=100)
+    quantite = models.PositiveIntegerField(default=1)
+    tva = models.DecimalField(max_digits=5, decimal_places=2, default=0.2)
+    montant_tva = models.DecimalField(max_digits=10, decimal_places=3)
+    montant_ht = models.DecimalField(max_digits=10, decimal_places=3)
+    montant_ttc = models.DecimalField(max_digits=10, decimal_places=3)
+    remise = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
+    
+    def save(self, *args, **kwargs):
+        # Set default value for echeance 1 month later than the date
+        if self.montant_ttc is None:
+            self.montant_ttc = self.montant_ht * (1 + self.tva)  # Calculate montant_ttc if not provided
+        if self.montant_total_ttc is None:
+            self.montant_total_ttc = self.quantite * self.montant_ttc
+        if self.montant_tva is None:
+            self.montant_tva = self.tva * self.montant_ht
+
+        super().save(*args, **kwargs)
