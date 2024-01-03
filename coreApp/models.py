@@ -219,20 +219,26 @@ class Promotion(models.Model):
         verbose_name = "Promotion"
         verbose_name_plural = "Promotions"
 
-
 class Devis(models.Model):
-    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='clients')
+    
     STATUS_CHOICES = [
         ('encours', 'En cours'),
         ('echu', 'Échu'),
-        ('valide', 'Validé'),
+        ('confirme', 'Confirmé'),
+        ('annule', 'Annulé'),
+        ('paye', 'Payé'),
     ]
+    suivi_par = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True, related_name='devis_suivi_par')
     status_devis = models.CharField(max_length=20, choices=STATUS_CHOICES, default='encours')
     date = models.DateTimeField(auto_now_add=True)
     echeance = models.DateTimeField(auto_now_add=True)
     reference = models.CharField(max_length=50, unique=True)
     document = models.FileField(upload_to='documents/')
     montant_total_ttc = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    type_devis = models.CharField(max_length=10, choices=[('achat', 'Achat'), ('vente', 'Vente')])
+    sous_type_devis = models.CharField(max_length=10, choices=[('commande', 'Commande'), ('livraison', 'Livraison'), ('retour', 'Retour'),('facture', 'Facture')])
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='devis_clients', null=True, blank=True)
+    fournisseur = models.ForeignKey(Fournisseur, on_delete=models.CASCADE, related_name='devis_fournisseurs', null=True, blank=True)
     
     def save(self, *args, **kwargs):
         # Set default value for echeance 1 month later than the date
@@ -268,3 +274,4 @@ class LigneDevis(models.Model):
             self.montant_tva = self.tva * self.montant_ht
 
         super().save(*args, **kwargs)
+        
