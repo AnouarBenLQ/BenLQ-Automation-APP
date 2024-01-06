@@ -14,8 +14,8 @@ class BaseDevis(models.Model):
         ('annule', 'Annulé'),
         ('paye', 'Payé'),
     ]
-    entreprise = models.ForeignKey(Entreprise, on_delete=models.CASCADE, related_name='devis')
-    suivi_par = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True, related_name='devis_suivi_par')
+    
+    
     status_devis = models.CharField(max_length=20, choices=STATUS_CHOICES, default='encours')
     date = models.DateTimeField(auto_now_add=True)
     date_modification =  models.DateTimeField(auto_now=True)
@@ -23,9 +23,6 @@ class BaseDevis(models.Model):
     reference = models.CharField(max_length=100,blank=True,null=True)
     type_devis = models.CharField(max_length=10, choices=[('achat', 'Achat'), ('vente', 'Vente')])
     objet = models.CharField(max_length=100,blank=True,null=True)
-    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='devis_clients', null=False, blank=True)
-    
-    Commercial = models.ForeignKey(Commercial, on_delete=models.CASCADE,null=True, blank=True, related_name='commercial')
     commission_pourcentage = models.DecimalField(max_digits=5, decimal_places=2, default=0.0,null=True, blank=True)
     remise = models.ForeignKey(Remise, on_delete=models.SET_NULL, null=True, blank=True)
     adresse_de_livraison = models.CharField(max_length=100,blank=True,null=True)
@@ -65,8 +62,13 @@ class BaseLigne(models.Model):
 class Devis(BaseDevis):
     
     numero = models.AutoField(primary_key=True)
+    entreprise = models.ForeignKey(Entreprise, on_delete=models.CASCADE, related_name='devis_vente')
+    suivi_par = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='devis_suivi_par')
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='devis_clients', null=False, blank=True)
+    commercial = models.ForeignKey(Commercial, on_delete=models.CASCADE,null=True, blank=True, related_name='commercial_devis_vente')
     document = models.FileField(upload_to='documents/devisdevente/')
     bon_de_commande = models.ForeignKey("Commande", on_delete=models.SET_NULL, null=True, blank=True, related_name='bon_de_commande')
+    
 
 class LigneDevis(BaseLigne):
     devis = models.ForeignKey(Devis, on_delete=models.CASCADE, related_name='lignes_devis')
@@ -74,6 +76,10 @@ class LigneDevis(BaseLigne):
 class Commande(BaseDevis):
     
     numero = models.AutoField(primary_key=True)
+    entreprise = models.ForeignKey(Entreprise, on_delete=models.CASCADE, related_name='commande')
+    suivi_par = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='commandes_suivi_par')
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='commande_clients', null=False, blank=True)
+    commercial = models.ForeignKey(Commercial, on_delete=models.CASCADE,null=True, blank=True, related_name='commercial_commande_vente')
     document = models.FileField(upload_to='documents/bondecommande/')
     bon_de_livraison = models.ForeignKey("Livraison", on_delete=models.SET_NULL, null=True, blank=True, related_name='bon_de_livraison')
 
@@ -83,6 +89,10 @@ class LigneCommande(BaseLigne):
 class Livraison(BaseDevis):
     
     numero = models.AutoField(primary_key=True)
+    entreprise = models.ForeignKey(Entreprise, on_delete=models.CASCADE, related_name='livraisons')
+    suivi_par = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='livraisons_suivi_par')
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='livraison_clients', null=False, blank=True)
+    commercial = models.ForeignKey(Commercial, on_delete=models.CASCADE,null=True, blank=True, related_name='commercial_livraison_vente')
     document = models.FileField(upload_to='documents/bondelivraison/')
     facture = models.ForeignKey("Facture", on_delete=models.SET_NULL, null=True, blank=True, related_name='facture')
 
@@ -92,6 +102,10 @@ class LigneLivraison(BaseLigne):
 class Facture(BaseDevis):
     
     numero = models.AutoField(primary_key=True)
+    entreprise = models.ForeignKey(Entreprise, on_delete=models.CASCADE, related_name='factures')
+    suivi_par = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='factures_suivi_par')
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='facture_clients', null=False, blank=True)
+    commercial = models.ForeignKey(Commercial, on_delete=models.CASCADE,null=True, blank=True, related_name='commercial_facture_vente')
     document = models.FileField(upload_to='documents/factures/')
 
 class LigneFacture(BaseLigne):
@@ -101,6 +115,8 @@ class LigneFacture(BaseLigne):
 class Retour(BaseDevis):
     
     numero = models.AutoField(primary_key=True)
+    suivi_par = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='retours_suivi_par')
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='retour_clients', null=False, blank=True)
     document = models.FileField(upload_to='documents/bonderetour/')
 
 class LigneRetour(BaseLigne):
@@ -110,6 +126,9 @@ class LigneRetour(BaseLigne):
 class Avoirs(BaseDevis):
     
     numero = models.AutoField(primary_key=True)
+    entreprise = models.ForeignKey(Entreprise, on_delete=models.CASCADE, related_name='avoirs')
+    suivi_par = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='avoirs_suivi_par')
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='avoirs_clients', null=False, blank=True)
     document = models.FileField(upload_to='documents/bonavoirs/')
 
 class LigneAvoirs(BaseLigne):
