@@ -1,25 +1,7 @@
 **TRINITY • Software Engineer**
 
 ___
-**I have two xlsx files I want to map out the content of file 1 TO FILE 2 WITH THE KEY "Lot Id" using pandas**
 
-Sure, here's an example code snippet that should help you achieve that:
-
-```python
-import pandas as pd
-
-# Read in both files
-file1 = pd.read_excel('file1.xlsx')
-file2 = pd.read_excel('file2.xlsx')
-
-# Merge the two files on the 'Lot Id' column
-merged = pd.merge(file1, file2, on='Lot Id')
-
-# Print the merged dataframe
-print(merged)
-```
-
-This code reads in both files using the `pd.read_excel()` function from pandas, and then merges them using the `pd.merge()` function, specifying the 'Lot Id' column as the key to merge on. The resulting merged dataframe is then printed to the console.
 ___
 **donne moi le processus d'achat d'un bien depuis un fournisseur **
 
