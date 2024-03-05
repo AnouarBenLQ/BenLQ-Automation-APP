@@ -1,0 +1,20 @@
+{
+    "[html][django-html][handlebars][hbs][mustache][jinja][jinja-html][nj][njk][nunjucks][twig]": {
+        "editor.defaultFormatter": "monosans.djlint"
+      },
+    "files.associations": {
+        "**/*.html": "html"
+    },
+    "emmet.includeLanguages": {
+        "django-html": "html"
+    },
+    "tailwindCSS.includeLanguages": {
+        "django-html": "html"
+    },
+    "tailwindCSS.emmetCompletions": true,
+    "tailwindCSS.experimental.classRegex": [
+        "\\b(?:class|className)\\s*=\\s*[\"'`][^\"'`]*[\"'`]"
+    ],
+   
+    "tailwindCSS.scanMode": "class"
+}

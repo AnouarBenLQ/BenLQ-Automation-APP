@@ -1,0 +1,41 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block content %}
+    <div class="sm:flex-auto">
+        <h1 class="text-xl font-semibold text-gray-900">Liste des {{ menu }}</h1>
+    </div>
+    <div x-cloak
+    x-data="myComponent">
+    <div class="bg-white h-full p-5 w-full rounded-lg border border-gray-200 shadow-md m-5 grid grid-cols-2 gap-2 max-sm:grid-cols-1">
+        <div class="col-span-1 p-2">
+            <div class="flex items-center justify-end align-baseline px-5">
+                <button class="bg-green-600 py-2 px-4 rounded-lg hover:bg-green-700 text-gray-50 font-medium"
+                        id="buttonToLoadModal"
+                        hx-get="{% url 'productsandservices:addcategory' %}"
+                        hx-trigger="click"
+                        x-on:click="openForm = true"
+                        hx-target="#formModal"
+                        type="button">Ajouter une Nouvelle Catégorie</button>
+            </div>
+            {% include "products/category_table.html" %}
+        </div>
+        <div class="col-span-1 p-2">
+            <div class="flex items-center justify-end align-baseline px-5">
+                <button type="button"
+                        id="buttonToLoadModal"
+                        hx-get="{% url 'productsandservices:add_subcategory' %}"
+                        hx-trigger="click"
+                        x-on:click="openForm2 = true"
+                        hx-target="#form2Modal"
+                        class="bg-green-600 py-2 px-4 rounded-lg hover:bg-green-700 text-gray-50 font-medium">
+                    Ajouter une Nouvelle sous-catégorie
+                </button>
+            </div>
+            {% include "products/category_table.html" %}
+        </div>
+    </div>
+    <div x-show="openForm" id="formModal" hx-target="this"></div>
+    <div x-show="openForm2" id="form2Modal" hx-target="this"></div>
+    {% include "core/partials/components/notification.html" %}
+</div>
+{% endblock content %}

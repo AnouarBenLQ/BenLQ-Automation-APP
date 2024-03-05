@@ -1,0 +1,27 @@
+{% load widget_tweaks %}
+<div class="m-5 grid grid-cols-2 gap-1 sm:max-md:grid-cols-1 px-2 border-t border-b rounded-lg shadow-md p-2 my-4 space-x-2 bg-gray-50">
+    <div class="col-span-1">
+      <div class="flex p-1 items-center justify-between ">
+        <label for="{{ form.product.id_for_label }}"
+               class="text-sm leading-6 text-gray-900">
+          {{ form.product.label }}
+          {% if form.product.field.required %}<span class="text-red-500">*</span>{% endif %}:
+        </label>
+        {% render_field form.product class="block  w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm" %}
+      </div>
+      <div class=" invalid-feedback text-red-500 fw-bold">{{ form.product.errors|first }}</div>
+    </div>
+    <div class="col-span-1">
+      <div class="flex p-1 items-center justify-between ">
+        <label for="{{ form.quantity.id_for_label }}"
+               class="text-sm  leading-6 text-gray-900">
+          {{ form.quantity.label }}
+          {% if form.quantity.field.required %}<span class="text-red-500">*</span>{% endif %}
+          :
+        </label>
+        {% render_field form.quantity class="block  w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm" %}
+      </div>
+      <div class=" invalid-feedback text-red-500 fw-bold">{{ form.quantity.errors|first }}</div>
+    </div>
+    
+</div>

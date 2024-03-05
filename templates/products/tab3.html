@@ -1,0 +1,21 @@
+
+{% load widget_tweaks %}
+<div class=" bg-gray-50 rounded-lg shadow-lg m-4 p-2 space-y-4 ">
+    <div class="flex p-1 items-center justify-between ">
+      <label for="{{ form.longueur.id_for_label }}" class="font-medium text-sm leading-6 text-gray-900">{{ form.longueur.label }}{% if form.longueur.field.required %}<span class="text-red-500"> *</span>{% endif %}: </label>
+      {% render_field form.longueur class="block h-8 w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm" %}
+    </div>
+    <div class="flex p-1 items-center justify-between ">
+      <label for="{{ form.largeur.id_for_label }}" class="font-medium text-sm leading-6 text-gray-900">{{ form.largeur.label }}{% if form.largeur.field.required %}<span class="text-red-500"> *</span>{% endif %}: </label>
+      {% render_field form.largeur class="block h-8 w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm" %}
+    </div>
+    <div class="flex p-1 items-center justify-between ">
+      <label for="{{ form.couleur.id_for_label }}" class="font-medium text-sm leading-6 text-gray-900">{{ form.couleur.label }}{% if form.couleur.field.required %}<span class="text-red-500"> *</span>{% endif %}: </label>
+      {% render_field form.couleur  type="color" class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm" %}
+  </div>
+    <div class="flex p-1 items-center justify-between ">
+      <label for="{{ form.sous_categorie.id_for_label }}" class="font-medium text-sm leading-6 text-gray-900">{{ form.sous_categorie.label }}{% if form.sous_categorie.field.required %}<span class="text-red-500"> *</span>{% endif %}: </label>
+      {% render_field form.sous_categorie class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm" %}
+  </div>
+
+</div>

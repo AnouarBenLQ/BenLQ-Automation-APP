@@ -1,0 +1,147 @@
+{% extends "core/base.html" %}
+{% load static tailwind_tags %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="flex items-center mb-2">
+  {% include "core/partials/svgs/add.html" %}
+  <h1 class="text-2xl ml-2 align-middle text-gray-500">{{ title }}</h1>
+</div>
+
+{% with WIDGET_ERROR_CLASS="is-invalid" %}
+<form method="post" enctype="multipart/form-data" action="{{ request.path }}">
+  {% csrf_token %}
+  
+<div x-cloak x-data="{currentTab: 'Informations Générales'}"  class="bg-white shadow-lg rounded-lg p-2">
+  <div>
+    <div class="sm:hidden">
+      <label for="tabs" class="sr-only">Select a tab</label>
+      <!-- Use an "onChange" listener to redirect the user to the selected tab URL. -->
+      <select id="tabs" name="tabs" class="block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500">
+        <option selected >Informations Générales</option>
+  
+        <option>Caractéristiques</option>
+  
+        <option >Extra</option>
+  
+        
+      </select>
+    </div>
+    <div class="hidden sm:block">
+      <nav class="flex space-x-4" aria-label="Tabs">
+        <!-- Current: "bg-gray-100 text-gray-700", Default: "text-gray-500 hover:text-gray-700" -->
+        <a href="#" @click="currentTab=$el.innerHTML" :class="currentTab == $el.innerHTML ? 'bg-gray-100 text-gray-700' : '' " class="transition-all font-medium duration-350 text-gray-500 hover:text-gray-700 px-3 py-2  text-sm rounded-md" >Informations Générales</a>
+  
+        <a href="#" @click="currentTab=$el.innerHTML" :class="currentTab == $el.innerHTML ? 'bg-gray-100 text-gray-700' : '' " class="transition-all font-medium duration-350 text-gray-500 hover:text-gray-700 px-3 py-2  text-sm rounded-md">Caractéristiques</a>
+  
+        <a href="#" @click="currentTab=$el.innerHTML" :class="currentTab == $el.innerHTML ? 'bg-gray-100 text-gray-700' : '' " class="transition-all font-medium duration-350 text-gray-500 px-3 py-2  text-sm rounded-md" >Extra</a>
+  
+      </nav>
+      
+      <div x-show="currentTab == 'Informations Générales'" class="mt-6">
+        <div class="m-5 grid grid-cols-3 gap-1 sm:max-md:grid-cols-1 px-2 border-t border-b">
+          <div class="col-span-1 rounded-lg shadow-md p-2 my-4 space-y-4 bg-gray-50">
+            <span class="flex items-center justify-center font-bold underline ">Info Produit</span>
+                  <div class="flex p-1 items-center justify-between ">
+                      <label for="{{ form.designation.id_for_label }}" class="text-sm  leading-6 text-gray-900">{{ form.designation.label }}{% if form.designation.field.required %}<span class="text-red-500"> *</span>{% endif %}: </label>
+                      {% render_field form.designation class="block h-8 w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm" placeholder="Nom du Produit" %}
+                      
+                  </div>
+                  <div class=" invalid-feedback text-red-500 fw-bold">{{ form.designation.errors|first }}</div>
+                  <div class="flex p-1 items-center justify-between ">
+                      <label for="{{ form.code_barre.id_for_label }}" class="text-sm leading-6 text-gray-900">{{ form.code_barre.label }}{% if form.code_barre.field.required %}<span class="text-red-500"> *</span>{% endif %}: </label>
+                      {% render_field form.code_barre class="block h-8 w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm" %}
+                      
+                  </div>
+                  <div class=" invalid-feedback text-red-500 fw-bold">{{ form.code_barre.errors|first }}</div>
+                  <div class="flex p-1 items-center justify-between ">
+                      <label for="{{ form.stock.id_for_label }}" class="text-sm  leading-6 text-gray-900">{{ form.stock.label }}{% if form.stock.field.required %}<span class="text-red-500"> *</span>{% endif %}: </label>
+                      {% render_field form.stock class="block h-8 w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm" %}
+                      
+                  </div>
+                  <div class=" invalid-feedback text-red-500 fw-bold">{{ form.stock.errors|first }}</div>
+                  
+                      
+                  </div>
+              
+          
+          <div class="mx-2 col-span-2 rounded-lg shadow-md p-2 my-4 space-y-4 bg-gray-100 sm:max-md:my-2">
+              <span class="flex items-center justify-center font-bold underline ">Tarification</span>
+              <div class="grid grid-cols-2 gap-1 sm:max-md:grid-cols-1 ">
+                <div class="col-span-1">
+                      <div class="flex p-1 items-center justify-between ">
+                        <label for="{{ form.prix_1.id_for_label }}" class=" text-sm leading-6 text-gray-900">{{ form.prix_1.label }}{% if form.prix_1.field.required %}<span class="text-red-500"> *</span>{% endif %}: </label>
+                        {% render_field form.prix_1 class="block h-8 w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm" %}
+                      </div>
+                      <div class="flex p-1 items-center justify-between ">
+                        <label for="{{ form.prix_ttc_1.id_for_label }}" class=" text-sm leading-6 text-gray-900">{{ form.prix_ttc_1.label }}{% if form.prix_ttc_1.field.required %}<span class="text-red-500"> *</span>{% endif %}: </label>
+                        {% render_field form.prix_ttc_1 class="block h-8 w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm" %}
+                      </div>
+                      <div class="flex p-1 items-center justify-between ">
+                        <label for="{{ form.prix_achat_net.id_for_label }}" class=" text-sm leading-6 text-gray-900">{{ form.prix_achat_net.label }}{% if form.prix_achat_net.field.required %}<span class="text-red-500"> *</span>{% endif %}: </label>
+                        {% render_field form.prix_achat_net class="block h-8 w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm" %}
+                    </div>
+                      <div class="flex p-1 items-center justify-between ">
+                        <label for="{{ form.prix_achat_net_ttc.id_for_label }}" class=" text-sm leading-6 text-gray-900">{{ form.prix_achat_net_ttc.label }}{% if form.prix_achat_net_ttc.field.required %}<span class="text-red-500"> *</span>{% endif %}: </label>
+                        {% render_field form.prix_achat_net_ttc class="block h-8 w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm" %}
+                    </div>
+                    <div class="flex p-1 items-center justify-between ">
+                        <label for="{{ form.tva_pourcentage.id_for_label }}" class=" text-sm leading-6 text-gray-900">{{ form.tva_pourcentage.label }}{% if form.tva_pourcentage.field.required %}<span class="text-red-500"> *</span>{% endif %}: </label>
+                        {% render_field form.tva_pourcentage class="block h-8 w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm" %}
+                    </div>
+                    
+                    
+                  </div>
+                    
+                <div class="col-span-1">
+                  <div class="flex p-1 items-center justify-between ">
+                    <label for="{{ form.prix_2.id_for_label }}" class=" text-sm leading-6 text-gray-900">{{ form.prix_2.label }}{% if form.prix_2.field.required %}<span class="text-red-500"> *</span>{% endif %}: </label>
+                    {% render_field form.prix_2 class="block h-8 w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm" %}
+                  </div>
+                  <div class="flex p-1 items-center justify-between ">
+                    <label for="{{ form.prix_ttc_2.id_for_label }}" class=" text-sm leading-6 text-gray-900">{{ form.prix_ttc_2.label }}{% if form.prix_ttc_2.field.required %}<span class="text-red-500"> *</span>{% endif %}: </label>
+                    {% render_field form.prix_ttc_2 class="block h-8 w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm" %}
+                  </div>
+                  <div class="flex p-1 items-center justify-between ">
+                    <label for="{{ form.prix_3.id_for_label }}" class=" text-sm leading-6 text-gray-900">{{ form.prix_3.label }}{% if form.prix_3.field.required %}<span class="text-red-500"> *</span>{% endif %}: </label>
+                    {% render_field form.prix_3 class="block h-8 w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm" %}
+                </div>
+                  <div class="flex p-1 items-center justify-between ">
+                    <label for="{{ form.prix_ttc_3.id_for_label }}" class=" text-sm leading-6 text-gray-900">{{ form.prix_ttc_3.label }}{% if form.prix_ttc_3.field.required %}<span class="text-red-500"> *</span>{% endif %}: </label>
+                    {% render_field form.prix_ttc_3 class="block h-8 w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm" %}
+                </div>
+                <div class="flex p-1 items-center justify-between ">
+                  <label for="{{ form.unite_vente.id_for_label }}" class=" text-sm leading-6 text-gray-900">{{ form.unite_vente.label }}{% if form.unite_vente.field.required %}<span class="text-red-500"> *</span>{% endif %}: </label>
+                  {% render_field form.unite_vente class="block  w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm" %}
+              </div>
+               
+                </div>
+          </div>
+            
+            
+            
+          </div>
+          
+      </div>
+      </div>
+      <div x-show="currentTab == 'Caractéristiques'" class="mt-6">
+        {% include "products/tab2.html" %}
+      </div>
+      <div x-show="currentTab == 'Extra'" class="mt-6 border-t border-b">
+        {% include "products/tab3.html" %}
+      </div>
+      <div class="flex items-center justify-end mt-2">
+        <button type="submit" class="my-1 mr-1 px-4 py-2 flex items-center justify-center  border border-transparent  rounded-md text-white bg-indigo-600 hover:bg-indigo-700 ">
+          Enregistrer</button>
+          <button type="button" class="my-1 px-4 py-2 flex items-center justify-center border border-transparent  rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200">Annuler</button>
+    </div>
+    
+  </div>
+  </div>
+  
+
+</div>
+</form>
+{% endwith %}
+  {% endblock content %}

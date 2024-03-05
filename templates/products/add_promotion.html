@@ -1,0 +1,101 @@
+{% extends "core/base.html" %}
+{% load static tailwind_tags %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+  <script>var showToast = {{ showToast|yesno:"true,false" }};</script>
+  <section id="messages">
+    {% include "core/partials/components/toast.html" %}
+  </section>
+  <div class="flex items-center mb-2">
+    {% include "core/partials/svgs/add.html" %}
+    <h1 class="text-2xl ml-2 align-middle text-gray-500">{{ title }}</h1>
+  </div>
+  {% with WIDGET_ERROR_CLASS="is-invalid" %}
+    <form method="post"
+          enctype="multipart/form-data"
+          action="{{ request.path }}">
+      {% csrf_token %}
+      <div x-cloak
+           x-data="{currentTab: 'Informations Générales'}"
+           class="bg-white shadow-lg rounded-lg p-2">
+        <div>
+          <div class="hidden sm:block">
+            <div class="mt-6">
+              <div class="m-5 p-4 grid grid-cols-1 gap-1 sm:max-md:grid-cols-1 px-2 border-t border-b">
+                
+                <div class="mx-2  rounded-lg shadow-lg p-2 my-4 space-y-4 bg-gray-50 sm:max-md:my-2">
+                  <span class="flex items-center justify-center font-bold underline ">Nouvelle Promotion</span>
+                  <div class="grid grid-cols-2 gap-1 sm:max-md:grid-cols-1 ">
+                    <div class="col-span-1 my-5 mx-20">
+                      <div class="flex p-1 items-center justify-between ">
+                        <label for="{{ form.nom.id_for_label }}"
+                               class=" text-sm leading-6 text-gray-900">
+                          {{ form.nom.label }}
+                          {% if form.nom.field.required %}<span class="text-red-500">*</span>{% endif %}
+                          :
+                        </label>
+                        {% render_field form.nom placeholder="Black Friday, Sold, fidélité client..." class="block h-8 w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm" %}
+                      </div>
+                      <div class="flex p-1 items-center justify-between ">
+                        <label for="{{ form.produit.id_for_label }}"
+                               class=" text-sm leading-6 text-gray-900">
+                          {{ form.produit.label }}
+                          {% if form.produit.field.required %}<span class="text-red-500">*</span>{% endif %}
+                          :
+                        </label>
+                        {% render_field form.produit class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm" %}
+                      </div>
+                      <div class="flex p-1 items-center justify-between ">
+                        <label for="{{ form.taux_reduction.id_for_label }}"
+                               class=" text-sm leading-6 text-gray-900">
+                          {{ form.taux_reduction.label }}
+                          {% if form.taux_reduction.field.required %}<span class="text-red-500">*</span>{% endif %}
+                          :
+                        </label>
+                        {% render_field form.taux_reduction class="block h-8 w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm" %}
+                      </div>
+                    </div>
+                    <div class="col-span-1 my-5 mx-20">
+                      <div class="flex p-1 items-center justify-between ">
+                        <label for="{{ form.date_debut.id_for_label }}"
+                               class=" text-sm leading-6 text-gray-900">
+                          {{ form.date_debut.label }}
+                          {% if form.date_debut.field.required %}<span class="text-red-500">*</span>{% endif %}
+                          :
+                        </label>
+                        {% render_field form.date_debut class="block h-8 w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm" %}
+                      </div>
+                      <div class="flex p-1 items-center justify-between ">
+                        <label for="{{ form.date_fin.id_for_label }}"
+                               class=" text-sm leading-6 text-gray-900">
+                          {{ form.date_fin.label }}
+                          {% if form.date_fin.field.required %}<span class="text-red-500">*</span>{% endif %}
+                          :
+                        </label>
+                        {% render_field form.date_fin class="block h-8 w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm" %}
+                      </div>
+                     
+                     
+                     
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center justify-end mt-2">
+              <button type="submit"
+                      class=" mr-1 px-4 py-2 flex items-center justify-center  border border-transparent  rounded-md text-white bg-indigo-600 hover:bg-indigo-700 ">
+                Enregistrer
+              </button>
+              <button type="button"
+                      class=" px-4 py-2 flex items-center justify-center border border-transparent  rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200">
+                Annuler
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  {% endwith %}
+{% endblock content %}

@@ -1,0 +1,219 @@
+{% extends "core/base.html" %}
+{% load static tailwind_tags %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<div class="flex items-center mb-2">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
+  </svg>
+  <h1 class="text-2xl ml-2 align-middle text-gray-500">{{ title }}</h1>
+</div>
+
+<script>
+  var showModal = {{ showModal|yesno:"true,false" }};
+</script>
+<div x-cloak x-data="{ open: showModal }"  class="bg-white shadow-lg rounded-lg p-2">
+  {% include "core/partials/components/notification.html" %}
+  {% with WIDGET_ERROR_CLASS='is-invalid' %}
+    <form method="post" enctype="multipart/form-data" action="{{ request.path }}">
+      {{ form.media }}
+      {% csrf_token %}
+      <div class="m-5 grid grid-cols-3 gap-2 ">
+              <div class="col-span-2  rounded-sm shadow-md p-2 space-y-4 divide-y divide-gray-200">
+                <div class="space-y-4 px-5 py-2 border-2 mx-auto rounded-lg shadow-md">
+                  <label for="{{ form.type_societe.id_for_label }}" class="block text-gray-700 text-sm font-bold mb-2">Type de société{% if form.type_societe.field.required %}<span class="text-red-500"> *</span>{% endif %} :</label>
+                  <div class="flex justify-between">
+                      {% for value, label in form.type_societe.field.choices %}
+                          <label class="inline-flex items-center mr-4">
+                              <input type="radio" name="{{ form.type_societe.name }}" value="{{ value }}" class=" px-1 mx-1 form-radio focus:ring-indigo-500 h-5 w-5 text-indigo-600">
+                              <span class="ml-2 text-gray-700">{{ label }}</span>
+                          </label>
+                      {% endfor %}
+                      
+                  </div>
+                  <div class="invalid-feedback text-red-500 fw-bold">{{ form.type_societe.errors|first }}</div>
+                  
+                  <div class="flex p-1 items-center justify-between bg-gray-100 rounded-md">
+                    <label for="{{ form.raison_sociale.id_for_label }}" class="text-lg font-medium leading-6 text-gray-900">{{ form.raison_sociale.label }}{% if form.raison_sociale.field.required %}<span class="text-red-500"> *</span>{% endif %}: </label>
+                    
+                    {% render_field form.raison_sociale class="block h-8 w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm" %}
+                    
+                  </div>
+                  <div class="invalid-feedback text-red-500 fw-bold">{{ form.raison_sociale.errors }} </div>
+                
+                  <div class="flex items-center my-1 p-1 justify-between bg-gray-100 rounded-lg">
+                    <label for="{{ form.site_web.id_for_label }}" class="text-lg font-medium leading-6 text-gray-900">{{ form.site_web.label }}: </label>
+                    <div class="h-8 mt-1 flex rounded-md shadow-sm">
+                    <span class="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-sm text-gray-500">http://</span>
+                    {% render_field form.site_web class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="www.exemple.com" %}
+                    </div>
+                  </div>
+                
+
+                </div>
+                <div class="border-2 rounded-lg shadow-md px-4 py-5 sm:rounded-lg sm:p-6">
+                  <div class="md:grid md:grid-cols-3 md:gap-6">
+                    
+                    <div class="mt-5 md:col-span-3 md:mt-0">
+                      <div class="grid grid-cols-6 gap-6">
+                        <div class="col-span-6 sm:col-span-3">
+                          <label for="{{ form.prenom.id_for_label }}" class="block text-sm font-medium text-gray-700">{{ form.prenom.label }}</label>
+                          {% render_field form.prenom type="text" name="first-name" id="first-name" autocomplete="given-name" class="h-8 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %}
+                          
+                        </div>
+              
+                        <div class="col-span-6 sm:col-span-3">
+                          <label for="last-name" class="block text-sm font-medium text-gray-700">{{ form.nom.label }}</label>
+                          {% render_field form.prenom type="text" name="last-name" id="last-name" autocomplete="family-name" class="h-8 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %}
+                          
+                        </div>
+                        <div class="col-span-6 sm:col-span-6 lg:col-span-2">
+                          <label for="{{ form.telephone.id_for_label }}" class="block text-sm font-medium text-gray-700">{{ form.telephone.label }}</label>
+                          {% render_field form.telephone class=" h-8 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="05 XX XX XX XX" %}
+                        </div>
+              
+                        <div class="col-span-6 sm:col-span-3 lg:col-span-2">
+                          <label for="{{ form.gsm.id_for_label }}" class="block text-sm font-medium text-gray-700">{{ form.gsm.label }}</label>
+                          {% render_field form.gsm type="text" name="region" id="region" autocomplete="address-level1" class="h-8 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="06 XX XX XX XX" %}
+                        </div>
+              
+                        <div class="col-span-6 sm:col-span-3 lg:col-span-2">
+                          <label for="{{ form.fax.id_for_label }}" class="block text-sm font-medium text-gray-700">{{ form.fax.label }}</label>
+                          {% render_field form.fax type="text" name="postal-code" id="postal-code" autocomplete="postal-code" class="h-8 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="05 XX XX XX XX"%}
+                        </div>
+              
+                        <div class="col-span-6 sm:col-span-4">
+                          <label for="{{ form.email.id_for_label }}" class="block text-sm font-medium text-gray-700">{{ form.email.label }}</label>
+                          <div class="h-8 mt-1 flex rounded-md shadow-sm">
+                          <span class="inline-flex items-center rounded-l-md border border-r-0 border-gray-300 bg-gray-50 px-3 text-sm text-gray-500">@</span>
+                          {% render_field form.email type="text" name="email-address" id="email-address" autocomplete="email" class="block w-full flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="exemple@societe.com" %}
+                          </div>
+                        </div>
+                        <div class="col-span-6 sm:col-span-2">
+                          <label class="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">Logo Societé</label>
+                          <div class="mt-1 sm:col-span-2 sm:mt-0">
+                            <div class="flex max-w-lg justify-center rounded-md border-2 border-dashed border-gray-300 px-2 pt-2 pb-2">
+                              <div class="space-y-1 text-center">
+                                <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                                  <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                <div class="flex text-sm text-gray-600">
+                                  <label for="{{ form.logo_societe.id_for_label }}" class="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500">
+                                    <span>Charger un Logo</span>
+                                    {% comment %} <input id="file-upload" name="file-upload" type="file" class="sr-only"> {% endcomment %}
+                                    {% render_field form.logo_societe type="file" class="custom-file-input" %}
+                                    {% comment %} {{ form.logo_societe}} {% endcomment %}
+                                  </label>
+                                  
+                                </div>
+                                <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                     
+                
+              
+                        <div class="col-span-6 sm:col-span-3">
+                          <label for="{{ form.pays.id_for_label }}" class="block text-sm font-medium text-gray-700">{{ form.pays.label }}</label>
+                          
+                          {% with select_options=form.pays.field.choices %}
+                            {% render_field form.pays id="country" name="country" autocomplete="country-name" class=" mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" %}
+                          {% endwith %}
+                        </div>
+              
+                        <div class="col-span-6">
+                          <label for="{{ form.adresse.id_for_label }}" class="block text-sm font-medium text-gray-700">{{ form.adresse.label }}</label>
+                          {% render_field form.adresse type="text" name="street-address" id="street-address" autocomplete="street-address" class="h-8 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %}
+                        </div>
+              
+                        <div class="col-span-6 sm:col-span-6 lg:col-span-2">
+                          <label for="{{ form.ville.id_for_label }}" class="block text-sm font-medium text-gray-700">{{ form.ville.label }}</label>
+                          {% render_field form.ville type="text" name="city" id="city" autocomplete="address-level2" class="h-8 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"%}
+                        </div>
+              
+                        <div class="col-span-6 sm:col-span-3 lg:col-span-2">
+                          <label for="{{ form.province.id_for_label }}" class="block text-sm font-medium text-gray-700">Region / Province</label>
+                          {% render_field form.province type="text" name="region" id="region" autocomplete="address-level1" class="h-8 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"%}
+                        </div>
+              
+                        <div class="col-span-6 sm:col-span-3 lg:col-span-2">
+                          <label for="{{ form.code_postal.id_for_label }}" class="block text-sm font-medium text-gray-700">{{ form.code_postal.label }}</label>
+                          {% render_field form.code_postal type="text" name="postal-code" id="postal-code" autocomplete="postal-code" class="h-8 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"%}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-span-6">
+                  <label for="{{ form.note.id_for_label }}" class="block text-sm font-medium text-gray-700">{{ form.note.label }}</label>
+                  {% render_field form.note type="text" name="street-address" id="street-address" autocomplete="street-address" class="h-32 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %}
+                </div>
+              </div>
+
+              <div class="px-5 py-2 col-span-1 rounded-sm shadow-md p-2 space-y-4 divide-y divide-gray-200">
+                
+                  <div class="bg-gray-100 px-5 py-2 border-2 rounded-lg shadow-md grid grid-cols-1 gap-6">
+                    <div class="col-span-6 sm:col-span-4">
+                      <label for="{{ form.suivi_par.id_for_label }}" class="block text-sm font-medium text-gray-700">{{ form.suivi_par.label }}</label>
+                      {% render_field form.suivi_par type="text" name="suivi par" id="comptable" autocomplete="suivi_par" class="h-8 mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm" %}
+                      </div>
+                    <div class="col-span-6 sm:col-span-4">
+                      <label for="{{ form.banque.id_for_label }}" class="block text-sm font-medium text-gray-700">{{ form.banque.label }}</label>
+                      {% render_field form.banque type="text" name="Banque" id="email-address" autocomplete="banque" class="h-8 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %}
+                      </div>
+                      <div class="col-span-6 sm:col-span-4">
+                        <label for="{{ form.RIB.id_for_label }}" class="block text-sm font-medium text-gray-700">{{ form.RIB.label }}</label>
+                        {% render_field form.RIB type="text" name="RIB" id="email-address" autocomplete="banque" class="h-8 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" placeholder="XXXXX-XXXXX-XXXXXXXXXXXXX-XX" %}
+                      </div>
+                        <div class="col-span-6 sm:col-span-4">
+                          <label for="{{ form.ICE.id_for_label }}" class="block text-sm font-medium text-gray-700">{{ form.ICE.label }}</label>
+                          {% render_field form.ICE type="text" name="ICE" id="email-address" autocomplete="banque" class="h-8 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %}
+                        </div>
+                        <div class="col-span-1 sm:col-span-4">
+                          <label for="{{ form.devise.id_for_label }}" class="block text-sm font-medium text-gray-700">{{ form.devise.label }}</label>
+                          {% render_field form.devise type="text" name="devise" id="devise" autocomplete="devise" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %}
+                        </div>
+                        <div class="col-span-1 sm:col-span-4">
+                          <label for="{{ form.IF.id_for_label }}" class="block text-sm font-medium text-gray-700">{{ form.IF.label }}</label>
+                          {% render_field form.IF type="text" name="IF" id="devise" autocomplete="IF" class="h-8 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %}
+                        </div>
+                        <div class="col-span-1 sm:col-span-4">
+                          <label for="{{ form.RC.id_for_label }}" class="block text-sm font-medium text-gray-700">{{ form.RC.label }}</label>
+                          {% render_field form.RC type="text" name="RC" id="RC" autocomplete="RC" class="h-8 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %}
+                        </div>
+                    </div>
+                    <div class="bg-gray-100 px-5 py-2 border-2 rounded-lg shadow-md grid grid-cols-1 gap-6">
+                      <div class="col-span-1 sm:col-span-4">
+                        <label for="{{ form.solde_initial.id_for_label }}" class="block text-sm font-medium text-gray-700">{{ form.solde_initial.label }}</label>
+                        {% render_field form.solde_initial type="text" name="RC" id="RC" autocomplete="RC" class="h-8 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %}
+                      </div>
+                      <div class="col-span-1 sm:col-span-4">
+                        <label for="{{ form.plafond.id_for_label }}" class="block text-sm font-medium text-gray-700">{{ form.plafond.label }}</label>
+                        {% render_field form.plafond type="text" name="RC" id="RC" autocomplete="RC" class="h-8 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %}
+                      </div>
+                      <div class="col-span-1 sm:col-span-4">
+                        <label for="{{ form.conditions_reglement.id_for_label }}" class="block text-sm font-medium text-gray-700">{{ form.conditions_reglement.label }}</label>
+                        {% render_field form.conditions_reglement type="text" name="RC" id="RC" autocomplete="RC" class="h-8 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %}
+                      </div>
+                      <div class="col-span-1 sm:col-span-4">
+                        <label for="{{ form.date_initial_solde.id_for_label }}" class="block text-sm font-medium text-gray-700">{{ form.date_initial_solde.label }}</label>
+                        {% render_field form.date_initial_solde  name="date-solde" id="RC" autocomplete="RC" class="h-8 mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" %}
+                      </div>
+                    </div>
+                  </div>
+              </div>²
+              <div class="flex items-center justify-end">
+                <button type="submit" class="my-1 mr-1 px-4 py-2 flex items-center justify-center  border border-transparent font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 ">
+                  Enregistrer</button>
+                  <button class="my-1 px-4 py-2 flex items-center justify-center border border-transparent font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200">Annuler</button>
+              </div>
+            </div>
+          </form>
+          {% endwith %}
+      </div>
+      <script src="{% static 'js/flatpickr.fr.js' %}"></script>
+  {% endblock %}
