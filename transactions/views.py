@@ -19,5 +19,11 @@ nav_tabs = [
 def index(request):
     
     form=DevisForm()
-    context = {'nav_tabs': nav_tabs,'menu':'Devis','form':form,'url': reverse('productsandservices:addproduct')}
+    context = {'nav_tabs': nav_tabs,'menu':'Devis','form':form,'url': reverse('transactions:addinvoice')}
     return render(request, 'transactions/transactions.html', context)
+
+def add_invoice(request):
+    
+    
+    context = {'nav_tabs': nav_tabs,}
+    return render(request, 'transactions/add_invoice.html', context)

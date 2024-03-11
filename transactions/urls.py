@@ -6,5 +6,6 @@ app_name="transactions"
 urlpatterns = [
 
 path('transactions/', views.index, name='transactions'),
+path('transactions/addinvoice', views.add_invoice, name='addinvoice'),
 
 ]
