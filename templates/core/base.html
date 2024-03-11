@@ -1097,9 +1097,9 @@
                     <span class="sr-only">Open user menu</span>
                     
                     {% if user.profileImage %}
-                        <img class="h-8 w-8 rounded-full" src="{{ user.profileImage.url }}" alt="User Profile Image">
+                        <img class="h-8 w-8 rounded-full" height="" width="" src="{{ user.profileImage.url }}" alt="User Profile Image">
                       {% else %}
-                        <img class="h-8 w-8 rounded-full" src="{% static 'images/default_profile_pic.png' %}" alt="Default Image">
+                        <img height="" width="" class="h-8 w-8 rounded-full" src="{% static 'images/default_profile_pic.png' %}" alt="Default Image">
                       {% endif %}
                   </button>
                 </div>

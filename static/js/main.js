@@ -1,7 +1,7 @@
 document.addEventListener('alpine:init', () => {
     Alpine.data('myComponent', () => ({
-        openForm: true,
-        openForm2: true,
+        openForm: false,
+        openForm2: false,
         
         get isOpen() {
             return this.openForm;

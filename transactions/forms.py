@@ -11,7 +11,7 @@ class DevisForm(forms.ModelForm):
         fields = '__all__'
         
 
-class DevisClient(forms.ModelForm):
+class DevisClient(forms.Form):
     
     date=forms.DateField(widget=forms.DateInput(attrs={'type':'date'}),label='Date',initial=date.today)
-    produit = forms.ModelChoiceField(queryset=Client.objects.all(), label='Client')
+    client = forms.ModelChoiceField(queryset=Client.objects.all(), label='Client')

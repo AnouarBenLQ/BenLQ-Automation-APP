@@ -1,58 +1,56 @@
 {% extends "core/base.html" %}
 {% load static %}
 {% block content %}
-  <div x-cloak x-data="myComponent" class="px-4 sm:px-6 lg:px-8">
-
-    <div class="my-5 flex justify-end">
-      <button  type="button" class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
-      ><a href="{% url 'transactions:addinvoice' %}">
-        Ajouter</a></button>
-    </div>
-    
-    <div class="flex py-2 justify-between">
-      <div class="flex flex-1 gap-2 justify-center px-2 lg:ml-0 lg:justify-start">
-      <div class=" max-w-xs lg:max-w-xs ">
-        <input onfocus="(this.type='date')"
-        onblur="(this.type='text')"
-        placeholder="Date début"
-        type="text"
-        class="w-full rounded-md border border-gray-300 bg-white py-2 pr-3 leading-5 text-gray-900 placeholder-gray-500 focus:border-purple-500 focus:placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-purple-500 sm:text-sm h-10"
-        id="date_start">
-       
-      </div>
-      <div class="max-w-xs lg:max-w-xs ">
-        <input onfocus="(this.type='date')"
-               onblur="(this.type='text')"
-               placeholder="Date fin"
-               type="text"
-               class="w-full rounded-md border border-gray-300 bg-white py-2 pr-3 leading-5 text-gray-900 placeholder-gray-500 focus:border-purple-500 focus:placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-purple-500 sm:text-sm h-10"
-               id="date_end">
-      </div>
-      <div class="max-w-xs lg:max-w-xs ">
-        <select class="w-full rounded-md border border-gray-300 bg-white py-2 pl-5 leading-5 text-gray-500 placeholder-gray-500 focus:border-purple-500 focus:placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-purple-500 sm:text-sm h-10" name="pets" id="pet-select">
-          <option class="text-gray-500" >Client</option>
-          <option class="text-gray-500" >Aucun</option>
-         
-        </select>
-      </div>
-      <div class="max-w-xs lg:max-w-xs ">
-        
-        {% include "core/partials/components/search_button.html" %}
-        
-      </div>
-    </div>
-    
-  </div>
   
-    <div class=" flex flex-col">
-      <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
-        <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-          <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-            {% include "core/partials/components/table.html" %}
+    <div x-cloak x-data="myComponent" class="px-4 sm:px-6 lg:px-8">
+      <div class="my-5 flex justify-end">
+        <button @click="openForm2=true" type="button"
+                class="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto">
+                Ajouter
+        </button>
+      </div>
+      <div class="flex py-2 justify-between">
+        <div class="flex flex-1 gap-2 justify-center px-2 lg:ml-0 lg:justify-start">
+          <div class=" max-w-xs lg:max-w-xs ">
+            <input onfocus="(this.type='date')"
+                   onblur="(this.type='text')"
+                   placeholder="Date début"
+                   type="text"
+                   class="w-full rounded-md border border-gray-300 bg-white py-2 pr-3 leading-5 text-gray-900 placeholder-gray-500 focus:border-purple-500 focus:placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-purple-500 sm:text-sm h-10"
+                   id="date_start">
+          </div>
+          <div class="max-w-xs lg:max-w-xs ">
+            <input onfocus="(this.type='date')"
+                   onblur="(this.type='text')"
+                   placeholder="Date fin"
+                   type="text"
+                   class="w-full rounded-md border border-gray-300 bg-white py-2 pr-3 leading-5 text-gray-900 placeholder-gray-500 focus:border-purple-500 focus:placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-purple-500 sm:text-sm h-10"
+                   id="date_end">
+          </div>
+          <div class="max-w-xs lg:max-w-xs ">
+            <select class="w-full rounded-md border border-gray-300 bg-white py-2 pl-5 leading-5 text-gray-500 placeholder-gray-500 focus:border-purple-500 focus:placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-purple-500 sm:text-sm h-10"
+                    name="pets"
+                    id="pet-select">
+              <option class="text-gray-500">Client</option>
+              <option class="text-gray-500">Aucun</option>
+            </select>
+          </div>
+          <div class="max-w-xs lg:max-w-xs ">{% include "core/partials/components/search_button.html" %}</div>
+        </div>
+      </div>
+      <div class=" flex flex-col">
+        <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+            <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+              {% include "core/partials/components/table.html" %}
+            </div>
           </div>
         </div>
       </div>
+      <div x-show="openForm2">
+        {% include "transactions/modal_form.html" %}
+      </div>
     </div>
-  </div>
-  <div x-show="openForm2" id="form2Modal" hx-target="this"></div>
+    
+  
 {% endblock content %}
