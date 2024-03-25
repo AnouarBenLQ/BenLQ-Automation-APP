@@ -1,12 +1,23 @@
-<div class="rounded-lg py-1 min-h-full">
+<div class="m-5 border-2 py-2 bg-gray-100">
     <div class="flex items-center">
-        {% include "core/partials/svgs/document.html" %}
+        <svg class="h-8 w-8"
+             viewBox="0 0 24 24"
+             fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <g id="SVGRepo_bgCarrier" stroke-width="0">
+            </g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
+            </g>
+            <g id="SVGRepo_iconCarrier">
+            <path d="M13 3H5V21H19V9M13 3H14L19 8V9M13 3V7C13 8 14 9 15 9H19" stroke="#c0bfbf" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            </path>
+            </g>
+        </svg>
         <span class="ml-2 font-serif">DEVIS CLIENT</span>
         <span class="ml-2 font-serif">N# 025</span>
         <span class="ml-2 font-serif underline">Client X</span>
     </div>
     <div class="m-2 flex justify-between">
-        
         <div class="m-2 flex items-center gap-2">
             <!-- This example requires Tailwind CSS v2.0+ -->
             <div>
@@ -100,23 +111,7 @@
             </div>
         </div>
     </div>
-    <div x-data="{ modalOneOpen:false , modalTwoOpen:false }" class="bg-white shadow-xl m-2 p-2 ">
-        <div>
-            <div x-show="modalOneOpen"
-            @click.outside="modalOneOpen = false"
-            @keydown.window.escape="modalOneOpen = false"
-            x-transition:enter="ease-out duration-300"
-            x-transition:enter-start="opacity-0"
-            x-transition:enter-end="opacity-100"
-            x-transition:leave="ease-in duration-300"
-            x-transition:leave-start="opacity-100"
-            x-transition:leave-end="opacity-0">
-                {% include "transactions/components/modal_snippet.html" %}
-            </div>
-            <div x-show="modalTwoOpen">
-                {% include "transactions/components/modal_snippet.html" %}
-            </div>
-        </div>
+    <div class="bg-white shadow-xl m-2 p-2 ">
         <button class="bg-gray-400 m-2 py-1 px-4 font-bold text-white rounded-l-none rounded-md hover:bg-gray-500">
             DRAFT
         </button>
@@ -147,7 +142,22 @@
                 </div>
                 <div class=" pt-2 flex  items-center justify-center">
                     <button class="flex hover:underline decoration-blue-800" type="button">
-                        {% include "core/partials/svgs/edit_button.html" %}
+                        <svg class="h-4 w-4"
+                             viewBox="0 0 1024 1024"
+                             xmlns="http://www.w3.org/2000/svg"
+                             fill="#000000"
+                             stroke="#000000">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0">
+                            </g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
+                            </g>
+                            <g id="SVGRepo_iconCarrier">
+                            <path fill="#3c7aaa" d="M832 512a32 32 0 1 1 64 0v352a32 32 0 0 1-32 32H160a32 32 0 0 1-32-32V160a32 32 0 0 1 32-32h352a32 32 0 0 1 0 64H192v640h640V512z">
+                            </path>
+                            <path fill="#3c7aaa" d="m469.952 554.24 52.8-7.552L847.104 222.4a32 32 0 1 0-45.248-45.248L477.44 501.44l-7.552 52.8zm422.4-422.4a96 96 0 0 1 0 135.808l-331.84 331.84a32 32 0 0 1-18.112 9.088L436.8 623.68a32 32 0 0 1-36.224-36.224l15.104-105.6a32 32 0 0 1 9.024-18.112l331.904-331.84a96 96 0 0 1 135.744 0z">
+                            </path>
+                            </g>
+                        </svg>
                         <span class="text-xs text-[#3c7aaa] font-bold">Modifier les informations générales</span>
                     </button>
                 </div>
@@ -174,8 +184,23 @@
                     <span class="text-gray-400">Aucun</span>
                 </div>
                 <div class=" pt-2 flex items-center justify-center">
-                    <button @click="modalOneOpen=true" class="flex hover:underline decoration-blue-800" type="button">
-                       {% include "core/partials/svgs/edit_button.html" %}
+                    <button class="flex hover:underline decoration-blue-800" type="button">
+                        <svg class="h-4 w-4"
+                             viewBox="0 0 1024 1024"
+                             xmlns="http://www.w3.org/2000/svg"
+                             fill="#000000"
+                             stroke="#000000">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0">
+                            </g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
+                            </g>
+                            <g id="SVGRepo_iconCarrier">
+                            <path fill="#3c7aaa" d="M832 512a32 32 0 1 1 64 0v352a32 32 0 0 1-32 32H160a32 32 0 0 1-32-32V160a32 32 0 0 1 32-32h352a32 32 0 0 1 0 64H192v640h640V512z">
+                            </path>
+                            <path fill="#3c7aaa" d="m469.952 554.24 52.8-7.552L847.104 222.4a32 32 0 1 0-45.248-45.248L477.44 501.44l-7.552 52.8zm422.4-422.4a96 96 0 0 1 0 135.808l-331.84 331.84a32 32 0 0 1-18.112 9.088L436.8 623.68a32 32 0 0 1-36.224-36.224l15.104-105.6a32 32 0 0 1 9.024-18.112l331.904-331.84a96 96 0 0 1 135.744 0z">
+                            </path>
+                            </g>
+                        </svg>
                         <span class="text-xs text-[#3c7aaa] font-bold">Modifier les conditions de vente</span>
                     </button>
                 </div>
@@ -187,7 +212,21 @@
                     id="menu-button"
                     aria-expanded="true"
                     aria-haspopup="true">
-                    {% include "core/partials/svgs/add_button.html" %}
+                <svg class="mr-1 h-5 w-5 stroke-white group-hover:stroke-gray-700"
+                     viewBox="0 0 24 24"
+                     fill="none"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0">
+                    </g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
+                    </g>
+                    <g id="SVGRepo_iconCarrier">
+                    <g id="Edit / Add_Plus_Circle">
+                    <path id="Vector" d="M8 12H12M12 12H16M12 12V16M12 12V8M12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21Z" stroke-width="2"  stroke-linecap="round" stroke-linejoin="round">
+                    </path>
+                    </g>
+                    </g>
+                </svg>
                 Ajouter
             </button>
             <button type="button"
@@ -225,31 +264,55 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white">
-                    {% include "transactions/components/invoice_row.html" %}
-                    {% include "transactions/components/invoice_row.html" %}
-                   
+                    <tr>
+                        <td class="pl-2 py-4 whitespace-no-wrap border-b border-gray-500">
+                            <div>
+                                <input class="rounded-md w-3/4 text-xs leading-5" type="text">
+                            </div>
+                        </td>
+                        <td class="px-4 py-4 whitespace-no-wrap border-b border-gray-500">
+                            <input class="w-full text-xs rounded-md leading-5" type="text">
+                        </td>
+                        <td class="px-4 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
+                            <input class="w-3/4 rounded-md   leading-5" type="text">
+                        </td>
+                        <td class="px-4 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
+                            <input class="w-3/4 rounded-md leading-5" type="text">
+                        </td>
+                        <td class="px-4 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
+                            <input class="w-3/4 rounded-md   leading-5" type="text">
+                        </td>
+                        <td class="px-4 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
+                            <input class="w-3/4 rounded-md   leading-5" type="text">
+                        </td>
+                        <td class="px-4 py-4 whitespace-no-wrap text-right border-b border-gray-500 text-sm leading-5">
+                            <input class="w-full rounded-md leading-5" type="text">
+                        </td>
+                        <td class="px-4 py-4 whitespace-no-wrap text-right border-b border-gray-500 text-sm leading-5">
+                            <button type="button">
+                                <div class="group relative">
+                                    <svg class="h-10 w-10 fill-[#5e8fc9] hover:fill-[#3d618d]"
+                                         viewBox="0 0 24 24"
+                                         fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0">
+                                        </g>
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
+                                        </g>
+                                        <g id="SVGRepo_iconCarrier">
+                                        <path d="M16.19 2H7.81C4.17 2 2 4.17 2 7.81V16.18C2 19.83 4.17 22 7.81 22H16.18C19.82 22 21.99 19.83 21.99 16.19V7.81C22 4.17 19.83 2 16.19 2ZM16 12.75H12.75V16C12.75 16.41 12.41 16.75 12 16.75C11.59 16.75 11.25 16.41 11.25 16V12.75H8C7.59 12.75 7.25 12.41 7.25 12C7.25 11.59 7.59 11.25 8 11.25H11.25V8C11.25 7.59 11.59 7.25 12 7.25C12.41 7.25 12.75 7.59 12.75 8V11.25H16C16.41 11.25 16.75 11.59 16.75 12C16.75 12.41 16.41 12.75 16 12.75Z">
+                                        </path>
+                                        </g>
+                                    </svg>
+                                    <div class=" flex opacity-0 bottom-full bg-slate-100 font-bold text-black text-xs rounded-lg py-2 absolute z-10 group-hover:opacity-100 whitespace-nowrap -left-[180%] px-2 ml-3 pointer-events-none">
+                                        Ajouter une ligne
+                                    </div>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
-        </div>
-        <div class="border-t border-gray-200"></div>
-        <div class=" my-5 flex flex-col justify-end w-full">
-            <div class="font-bold text-sm px-5 py-2 flex justify-between w-1/3 ml-auto">
-                <span>Total HT</span>
-                <span>0.00 MAD</span>
-            </div>
-            <div class="font-bold text-sm px-5 py-2 flex justify-between w-1/3 ml-auto">
-                <span>Total TVA</span>
-                <span>0.00 MAD</span>
-            </div>
-            <div class=" my-2 px-5 py-2 bg-gray-200 font-bold text-sm flex justify-between w-1/3 ml-auto">
-                <span>Total TTC</span>
-                <span>0.00 MAD</span>
-            </div>
-            <div class="border-t border-gray-200"></div>
-           
-        </div>
-        <div class="mt-2 flex justify-end">
-            <button class="px-4 py-2 bg-indigo-500 rounded-md font-bold text-white">Enregister</button>
         </div>
     </div>
 </div>

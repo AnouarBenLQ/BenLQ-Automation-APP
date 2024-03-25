@@ -2,6 +2,8 @@
 {% load static tailwind_tags %}
 <!DOCTYPE html>
 <html class="h-full bg-gray-100" lang="en">
+  <meta name="description" content="Your meta description here">
+  <meta name="keywords" content="Your meta keywords here">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -104,7 +106,7 @@
                 {% include "core/partials/svgs/dropdown_arrow.html" with index=0 %}
                
             <div
-              class="group group:hover:bg-gray-500 flex items-center flex-col bg-gray-700 rounded-lg transition-all transition-all"
+              class="group group:hover:bg-gray-500 flex items-center flex-col bg-gray-700 rounded-lg transition-all"
               x-show="subMenus[0] && sidebarOpen"
               x-transition:enter="transition ease-out duration-300"
               x-transition:enter-start="transform opacity-0 scale-95"
@@ -513,7 +515,7 @@
               {% include "core/partials/svgs/home.html" %}
                 <span :class=" {'hidden' : !sidebarOpen}">Accueil</span>
                 <span
-                  class="transform translate-x-12 text-black rounded-md px-2 py-1 shadow-md absolute z-20 opacity-0 group-hover:opacity-100 group-hover:bg-slate-100"
+                  class="transform translate-x-12 text-black rounded-md px-2 py-1 shadow-md absolute z-20 opacity-0 group-hover:opacity-100 whitespace-nowrap group-hover:bg-slate-100"
                   :class=" {'hidden' : sidebarOpen}"
                   >Accueil</span
                 >
@@ -526,7 +528,7 @@
               {% include "core/partials/svgs/analytics.html" %}
                 <span :class=" {'hidden' : !sidebarOpen}"> Analytique</span>
                 <span
-                  class="transform translate-x-14 text-black rounded-md px-2 py-1 shadow-md absolute z-20 opacity-0 group-hover:opacity-100 group-hover:bg-slate-100"
+                  class="transform translate-x-14 text-black rounded-md px-2 py-1 shadow-md absolute z-20 opacity-0 group-hover:opacity-100 whitespace-nowrap group-hover:bg-slate-100"
                   :class=" {'hidden' : sidebarOpen}">
                   Analytique</span>
               </a>
@@ -548,7 +550,7 @@
                 <span :class=" {'hidden' : !sidebarOpen}">Contacts</span>
                 {% include "core/partials/svgs/dropdown_arrow.html" with index=0 %}
                 <span
-                  class="transform translate-x-14 text-black rounded-md px-2 py-1 shadow-md absolute z-20 opacity-0 group-hover:opacity-100 group-hover:bg-slate-100"
+                  class="transform translate-x-14 text-black rounded-md px-2 py-1 shadow-md absolute z-20 opacity-0 group-hover:opacity-100 whitespace-nowrap group-hover:bg-slate-100"
                   :class=" {'hidden' : sidebarOpen}"
                   >Contacts
                 </span>
@@ -602,7 +604,7 @@
                 >
                 {% include "core/partials/svgs/dropdown_arrow.html" with index=1 %}
                 <span
-                  class="transform translate-x-14 text-black rounded-md px-2 py-1 shadow-md absolute z-20 opacity-0 group-hover:opacity-100 group-hover:bg-slate-100"
+                  class="transform translate-x-14 text-black rounded-md px-2 py-1 shadow-md absolute z-20 opacity-0 group-hover:opacity-100 whitespace-nowrap group-hover:bg-slate-100"
                   :class=" {'hidden' : sidebarOpen}"
                   >Produits & Services</span>
                 <div
@@ -658,7 +660,7 @@
                 <span :class=" {'hidden' : !sidebarOpen}">Ventes</span>
                 {% include "core/partials/svgs/dropdown_arrow.html" with index=2 %}
                 <span
-                  class="transform translate-x-14 text-black rounded-md px-2 py-1 shadow-md absolute z-20 opacity-0 group-hover:opacity-100 group-hover:bg-slate-100"
+                  class="transform translate-x-14 text-black rounded-md px-2 py-1 shadow-md absolute z-20 opacity-0 group-hover:opacity-100 whitespace-nowrap group-hover:bg-slate-100"
                   :class=" {'hidden' : sidebarOpen}"
                   >Ventes</span>
                 <div
@@ -714,7 +716,7 @@
                 <span :class=" {'hidden' : !sidebarOpen}">Achats</span>
                 {% include "core/partials/svgs/dropdown_arrow.html" with index=3 %}
                 <span
-                  class="transform translate-x-14 text-black rounded-md px-2 py-1 shadow-md absolute z-20 opacity-0 group-hover:opacity-100 group-hover:bg-slate-100"
+                  class="transform translate-x-14 text-black rounded-md px-2 py-1 shadow-md absolute z-20 opacity-0 group-hover:opacity-100 whitespace-nowrap group-hover:bg-slate-100"
                   :class=" {'hidden' : sidebarOpen}"
                   >Achats</span
                 >
@@ -779,7 +781,7 @@
                 <span :class=" {'hidden' : !sidebarOpen}">Trésorie</span>
                 {% include "core/partials/svgs/dropdown_arrow.html" with index=5 %}
                 <span
-                  class="transform translate-x-14 text-black rounded-md px-2 py-1 shadow-md absolute z-20 opacity-0 group-hover:opacity-100 group-hover:bg-slate-100"
+                  class="transform translate-x-14 text-black rounded-md px-2 py-1 shadow-md absolute z-20 opacity-0 group-hover:opacity-100 whitespace-nowrap group-hover:bg-slate-100"
                   :class=" {'hidden' : sidebarOpen}"
                   >Trésorie</span
                 >
@@ -855,7 +857,7 @@
                 <span :class=" {'hidden' : !sidebarOpen,}">Stock</span>
                 {% include "core/partials/svgs/dropdown_arrow.html" with index=4 %}
                 <span
-                  class="transform translate-x-14 text-black rounded-md px-2 py-1 shadow-md absolute z-20 opacity-0 group-hover:opacity-100 group-hover:bg-slate-100"
+                  class="transform translate-x-14 text-black rounded-md px-2 py-1 shadow-md absolute z-20 opacity-0 group-hover:opacity-100 whitespace-nowrap group-hover:bg-slate-100"
                   :class=" {'hidden' : sidebarOpen}"
                   >Stock</span
                 >
@@ -914,7 +916,7 @@
                 <span :class=" {'hidden' : !sidebarOpen}">Utilisateurs</span>
                 {% include "core/partials/svgs/dropdown_arrow.html" with index=6 %}
                 <span
-                  class="transform translate-x-14 text-black rounded-md px-2 py-1 shadow-md absolute z-20 opacity-0 group-hover:opacity-100 group-hover:bg-slate-100"
+                  class="transform translate-x-14 text-black rounded-md px-2 py-1 shadow-md absolute z-20 opacity-0 group-hover:opacity-100 whitespace-nowrap group-hover:bg-slate-100"
                   :class=" {'hidden' : sidebarOpen}"
                   >Utilisateurs</span
                 >
@@ -951,7 +953,7 @@
                 <span :class=" {'hidden' : !sidebarOpen}">Parametres</span>
                 {% include "core/partials/svgs/dropdown_arrow.html" with index=7 %}
                 <span
-                  class="transform translate-x-14 text-black rounded-md px-2 py-1 shadow-md absolute z-20 opacity-0 group-hover:opacity-100 group-hover:bg-slate-100"
+                  class="transform translate-x-14 text-black rounded-md px-2 py-1 shadow-md absolute z-20 opacity-0 group-hover:opacity-100 whitespace-nowrap group-hover:bg-slate-100"
                   :class=" {'hidden' : sidebarOpen}"
                   >Parametres</span
                 >
@@ -984,7 +986,7 @@
       <div
         :class=" { 'md:pl-[3.5rem]': !sidebarOpen }"
         class="flex flex-col md:pl-64 -transitionall duration-300">
-        <div class="sticky top-0 z-10 flex h-16 flex-shrink-0 bg-white shadow">
+        <div class="sticky top-0  flex h-16 flex-shrink-0 bg-white shadow">
           {% include "core/partials/navigation/navbar.html" %}
           <button
             type="button"
