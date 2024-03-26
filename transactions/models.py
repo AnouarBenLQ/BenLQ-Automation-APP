@@ -17,9 +17,9 @@ class BaseDevis(models.Model):
     
     
     status_devis = models.CharField(max_length=20, choices=STATUS_CHOICES, default='encours')
-    date = models.DateTimeField(auto_now_add=True)
+    date = models.DateField()
     date_modification =  models.DateTimeField(auto_now=True)
-    echeance = models.DateTimeField()
+    echeance = models.DateField()
     reference = models.CharField(max_length=100,blank=True,null=True)
     type_devis = models.CharField(max_length=10, choices=[('achat', 'Achat'), ('vente', 'Vente')])
     objet = models.CharField(max_length=100,blank=True,null=True)

@@ -1,9 +1,12 @@
 <div class="rounded-lg py-1 min-h-full">
     <div class="flex items-center">
-        {% include "core/partials/svgs/document.html" %}
-        <span class="ml-2 font-serif">DEVIS CLIENT</span>
-        <span class="ml-2 font-serif">N# 025</span>
-        <span class="ml-2 font-serif underline">Client X</span>
+        <div class="bg-gray-50 shadow-md rounded-md px-2 py-1 inline-flex items-center">
+            {% include "core/partials/svgs/document.html" %}
+            <span class="ml-2 font-serif">DEVIS CLIENT</span>
+            <span class="ml-2 font-serif">N# 025</span>
+            <span class="ml-2 font-serif">Client</span>
+            <span class="ml-2 font-serif font-semibold text-xl px-2 py-1">{{ client }}</span>
+        </div>
     </div>
     <div class="m-2 flex justify-between">
         

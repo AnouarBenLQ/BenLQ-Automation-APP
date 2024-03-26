@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required 
 from django.contrib import messages
-from .forms import DevisForm,DevisClient
+from .forms import DevisForm,DevisClient,InformationDevis
 from contacts.models import Client
 from coreApp.models import Entreprise
 from datetime import date, datetime, timedelta
@@ -36,6 +36,7 @@ def add_invoice(request):
     
     context = {'nav_tabs': nav_tabs,}
     return render(request, 'transactions/add_invoice.html', context)
+
 def new_invoice(request,client, date):
     company=Entreprise.objects.get(pk=1)
     initial_date = datetime.strptime(date, '%Y-%m-%d')
@@ -45,4 +46,5 @@ def new_invoice(request,client, date):
     client_obj=Client.objects.get(pk=client)
     print(client_obj)
     client_name=client_obj.nom
-    return render(request,"transactions/add_invoice.html",{'date':date,'client':client_obj,'entreprise':company,'due_date':due_date})
+    form=InformationDevis()
+    return render(request,"transactions/add_invoice.html",{'date':date,'form':form,'client':client_obj,'entreprise':company,'due_date':due_date})
