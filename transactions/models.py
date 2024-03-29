@@ -15,6 +15,26 @@ class BaseDevis(models.Model):
         ('paye', 'Payé'),
     ]
     
+    DISCOUNT_TYPE_CHOICES = (
+    ('FIXED', 'Valeur fixe'),
+    ('PERCENT', 'Pourcentage'),
+)
+
+    
+    type_remise = models.CharField(
+        max_length=7,
+        choices=DISCOUNT_TYPE_CHOICES,
+        default='FIXED',
+        
+    )
+    
+    valeur_remise = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0.00,
+        verbose_name="Valeur Remise"
+        
+    )
     
     status_devis = models.CharField(max_length=20, choices=STATUS_CHOICES, default='encours')
     date = models.DateField()
@@ -26,14 +46,14 @@ class BaseDevis(models.Model):
     devise = models.CharField(max_length=3, default='MAD', verbose_name="Devise",blank=True, null=True)
     
     commission_pourcentage = models.DecimalField(max_digits=5, decimal_places=2, default=0.0,null=True, blank=True)
-    remise = models.ForeignKey(Remise, on_delete=models.SET_NULL, null=True, blank=True)
+    
     
     condition_reglement= models.ForeignKey(ConditionsReglement, on_delete=models.SET_NULL, null=True, blank=True)
     moyen_de_paiement = models.CharField(max_length=12, choices=[('Espèce', 'Espèce'), ('Prélèvement', 'Prélèvement'),('Chèque', 'Chèque'), ('Virement', 'Virement'),('Versement', 'Versement'),('Autre','Autre')],default='Autre')
     adresse_de_livraison = models.CharField(max_length=100,blank=True,null=True)
     date_livraison = models.DateField(blank=True,null=True)
     condition_livraison = models.CharField(max_length=100,blank=True,null=True)
-    note=models.TextField()
+    note=models.TextField(blank=True,null=True)
     
     class Meta:
         abstract = True
@@ -66,7 +86,8 @@ class BaseLigne(models.Model):
         
 class Devis(BaseDevis):
     
-    numero = models.AutoField(primary_key=True)
+    id = models.AutoField(primary_key=True)
+    numero=models.IntegerField(unique=True)
     entreprise = models.ForeignKey(Entreprise, on_delete=models.CASCADE, related_name='devis_vente')
     suivi_par = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='devis_suivi_par')
     client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='devis_clients', null=False, blank=True)

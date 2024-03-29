@@ -1,58 +1,72 @@
 <!-- Modal -->
-<div  
-     class=" bg-gray-500 bg-opacity-75 transition-all  inset-0 mx-auto size-full fixed z-[80] overflow-x-hidden overflow-y-auto rounded-lg">
+{% load static %}
+{% load widget_tweaks %}
+<div class=" bg-gray-500 bg-opacity-75 transition-all  inset-0 mx-auto size-full fixed z-[80] overflow-x-hidden overflow-y-auto rounded-lg">
   <div :class=" {'mt-7 opacity-100 duration-200' : modalOneOpen}"
        class="mt-0 ease-out transition-all sm:max-w-3xl sm:w-full m-3 sm:mx-auto">
-    <div 
-    @click.outside="modalOneOpen = false" class="bg-white border border-gray-200 rounded-xl shadow-sm pointer-events-auto">
-    <div class="flex justify-between items-center border-b py-2 bg-gray-100 text-gray-800 text-1xl font-semibold pl-5 rounded-md">
-      <span>Condition de vente</span>
-    
-      <div class="p-2">
-        <button @click="modalOneOpen = false" type="button" class="flex justify-center items-center size-7 text-sm font-semibold rounded-lg border border-transparent text-gray-800 hover:bg-gray-200 disabled:opacity-50 disabled:pointer-events-none">
-          <span class="sr-only">Close</span>
-          <svg class="flex-shrink-0 h-6 w-6 stroke-gray-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-        </button>
-      </div>
-    
- 
-    </div>
-      <div class="p-2 sm:p-5">
-        
-        <div class="mt-2 sm:mt-5 divide-y divide-gray-200 ">
-          <!-- Icon -->
-          <div class=" my-3 py-2 flex justify-between gap-2 items-center">
-            <label class="font-semibold text-gray-800">{{ form.client.label }}:</label>
-            {{ form.client }}
-          </div>
-          <div class=" my-3 py-2 flex justify-between gap-2 items-center">
-            <label class="font-semibold text-gray-800">{{ form.date.label }}:</label>
-            {{ form.date }}
-          </div>
-          <div class=" my-3 py-2 flex justify-between gap-2 items-center">
-            <label class="font-semibold text-gray-800">{{ form.echeance.label }}:</label>
-            {{ form.echeance }}
-          </div>
-          <div class=" my-3 py-2 flex justify-between gap-2 items-center">
-            <label class="font-semibold text-gray-800">{{ form.reference.label }}:</label>
-            {{ form.reference }}
-          </div>
-          <div class=" my-3 py-2 flex justify-between gap-2 items-center">
-            <label class="font-semibold text-gray-800">{{ form.suivi_par.label }}:</label>
-            {{ form.suivi_par }}
-          </div>
-         
-        
+    <div @click.outside="modalOneOpen = false"
+         class="bg-white border border-gray-200 rounded-xl shadow-sm pointer-events-auto">
+      <div class="flex justify-between items-center border-b py-2 bg-gray-100 text-gray-800 text-1xl font-semibold pl-5 rounded-md">
+        <span>Informations Générales</span>
+        <div class="p-2">
+          <button @click="modalOneOpen = false"
+                  type="button"
+                  class="flex justify-center items-center size-7 text-sm font-semibold rounded-lg border border-transparent text-gray-800 hover:bg-gray-200 disabled:opacity-50 disabled:pointer-events-none">
+            <span class="sr-only">Close</span>
+            <svg class="flex-shrink-0 h-6 w-6 stroke-gray-600"
+                 xmlns="http://www.w3.org/2000/svg"
+                 viewBox="0 0 24 24"
+                 fill="none"
+                 stroke-width="2"
+                 stroke-linecap="round"
+                 stroke-linejoin="round">
+              <path d="M18 6 6 18" />
+              <path d="m6 6 12 12" />
+            </svg>
+          </button>
         </div>
       </div>
-      <!-- Footer -->
-      <div class="flex justify-end items-center gap-x-2 p-4 sm:px-7 border-t bg-gray-100 rounded-lg">
-        <button type="button"
-                class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
-                data-hs-overlay="#hs-notifications">Annuler</button>
-        <a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none "
-           href="#">Enregistrer</a>
-      </div>
+      <form id="myForm" method="post">
+        {% csrf_token %}
+        <div class="p-2 sm:p-5">
+          <div class="mt-2 sm:mt-5 divide-y divide-gray-200 ">
+            <!-- Icon -->
+            <div class=" my-3 py-2 flex justify-between gap-2 items-center">
+              <label class="font-semibold text-gray-800">{{ form.client.label }}:</label>
+              {{ form.client }}
+            </div>
+            <div class=" my-3 py-2 flex justify-between gap-2 items-center">
+              <label class="font-semibold text-gray-800">{{ form.date.label }}:</label>
+              {{ form.date }}
+            </div>
+            <div class=" my-3 py-2 flex justify-between gap-2 items-center">
+              <label class="font-semibold text-gray-800">{{ form.echeance.label }}:</label>
+              {{ form.echeance }}
+            </div>
+            <div class=" my-3 py-2 flex justify-between gap-2 items-center">
+              <label class="font-semibold text-gray-800">{{ form.numero.label }}:</label>
+              {{ form.numero }}
+            </div>
+            <div class=" my-3 py-2 flex justify-between gap-2 items-center">
+              <label class="font-semibold text-gray-800">{{ form.reference.label }}:</label>
+              {{ form.reference }}
+            </div>
+            <div class=" my-3 py-2 flex justify-between gap-2 items-center">
+              <label class="font-semibold text-gray-800">{{ form.suivi_par.label }}:</label>
+              {{ form.suivi_par }}
+            </div>
+          </div>
+        </div>
+        <!-- Footer -->
+        <div class="flex justify-end items-center gap-x-2 p-4 sm:px-7 border-t bg-gray-100 rounded-lg">
+          <button type="button"
+                  class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+                  @click="modalOneOpen = false">Annuler</button>
+                  <button type="submit" @click="modalOneOpen = false" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none "
+             >Enregistrer</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
+<script src="{% static 'js/form-handler.js' %}" defer></script>

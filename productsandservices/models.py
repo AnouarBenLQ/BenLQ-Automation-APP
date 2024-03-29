@@ -27,7 +27,7 @@ class Remise(models.Model):
         (FIXED_VALUE, 'Valeur Fixe'),
     ]
 
-    type = models.CharField(max_length=1, choices=TYPE_CHOICES)
+    type_remise = models.CharField(max_length=1, choices=TYPE_CHOICES)
     value = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):

@@ -3,8 +3,9 @@ from django.http import HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required 
 from django.contrib import messages
-from .forms import DevisForm,DevisClient,InformationDevis
+from .forms import DevisForm,DevisClient,InformationDevis,ConditiondeVente
 from contacts.models import Client
+from accounts.models import CustomUser
 from coreApp.models import Entreprise
 from datetime import date, datetime, timedelta
 
@@ -45,6 +46,6 @@ def new_invoice(request,client, date):
     print(date)
     client_obj=Client.objects.get(pk=client)
     print(client_obj)
-    client_name=client_obj.nom
-    form=InformationDevis()
-    return render(request,"transactions/add_invoice.html",{'date':date,'form':form,'client':client_obj,'entreprise':company,'due_date':due_date})
+    form=InformationDevis(initial={'client': client_obj,'date':initial_date,'suivi_par':request.user})
+    form_two=ConditiondeVente()
+    return render(request,"transactions/add_invoice.html",{'date':date,'form':form,'form_two':form_two,'entreprise':company,})
