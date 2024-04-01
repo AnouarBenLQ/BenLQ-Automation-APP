@@ -63,8 +63,8 @@ GRAPH_MODELS = {
 
 TAILWIND_APP_NAME = 'theme'
 INTERNAL_IPS = ["127.0.0.1",]
-NPM_BIN_PATH = r"C:\NodeJS\npm.cmd"
-#NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
+#NPM_BIN_PATH = r"C:\NodeJS\npm.cmd"
+NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
 #C:\Program Files\nodejs\
 #C:\NodeJS\npm.cmd
 AUTH_USER_MODEL = 'accounts.CustomUser'

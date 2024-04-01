@@ -1,0 +1,111 @@
+{% if product %}
+<tr>
+    <td class="pl-2 py-4 whitespace-no-wrap ">
+        <div>
+            <input class="rounded-md w-3/4 text-xs leading-5 bg-gray-200" type="text" name="reference" value="{{ product.reference }}">
+        </div>
+    </td>
+    <td class="px-4 py-4 whitespace-no-wrap ">
+        
+            <input class="w-full text-xs rounded-md leading-5"
+            type="text" 
+            name="designation"
+            value="{{ product.designation }}">
+            
+         
+    </td>
+    <td class="px-4 py-4 whitespace-no-wrap  text-blue-900 text-sm leading-5">
+        <input class="w-3/4 rounded-md leading-5" name="quantity" type="number" value="1">
+    </td>
+    <td class="px-4 py-4 whitespace-no-wrap  text-blue-900 text-sm leading-5">
+        <input class="w-3/4 rounded-md leading-5" name="price_ht" type="number" value="{{ product.prix_1 }}">
+    </td>
+    <td class="px-4 py-4 whitespace-no-wrap  text-blue-900 text-sm leading-5">
+        <input class="w-3/4 rounded-md leading-5" name="price_ttc" type="number" value="{{ product.prix_ttc_1 }}">
+    </td>
+    <td class="px-4 py-4 whitespace-no-wrap  text-blue-900 text-sm leading-5">
+        <input class="w-3/4 rounded-md leading-5" name="price_total_ht" type="number">
+    </td>
+    <td class="px-4 py-4 whitespace-no-wrap ">
+        <input class="w-full text-xs rounded-md leading-5" name="price_total_ttc" type="number">
+    </td>
+    <td class="px-4 py-4 whitespace-no-wrap text-right  text-sm leading-5">
+        <button type="button"
+                hx-get="{% url 'transactions:addinvoicerow' %}"  
+                hx-target="#invoice-listing"
+                hx-swap="beforeend">
+            <div class="group relative">
+                <svg class="h-10 w-10 fill-[#5e8fc9] hover:fill-[#3d618d]"
+                     viewBox="0 0 24 24"
+                     fill="none"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0">
+                    </g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
+                    </g>
+                    <g id="SVGRepo_iconCarrier">
+                    <path d="M16.19 2H7.81C4.17 2 2 4.17 2 7.81V16.18C2 19.83 4.17 22 7.81 22H16.18C19.82 22 21.99 19.83 21.99 16.19V7.81C22 4.17 19.83 2 16.19 2ZM16 12.75H12.75V16C12.75 16.41 12.41 16.75 12 16.75C11.59 16.75 11.25 16.41 11.25 16V12.75H8C7.59 12.75 7.25 12.41 7.25 12C7.25 11.59 7.59 11.25 8 11.25H11.25V8C11.25 7.59 11.59 7.25 12 7.25C12.41 7.25 12.75 7.59 12.75 8V11.25H16C16.41 11.25 16.75 11.59 16.75 12C16.75 12.41 16.41 12.75 16 12.75Z">
+                    </path>
+                    </g>
+                </svg>
+                <div class=" transition-all ease-in-out duration-500 flex opacity-0 bottom-full bg-slate-100 font-bold text-black text-xs rounded-lg py-2 absolute z-10 group-hover:opacity-100 whitespace-nowrap -left-[180%] px-2 ml-3 pointer-events-none">
+                    Ajouter une ligne
+                </div>
+            </button>
+        </div>
+    </td>
+</tr>
+{% else %}
+<tr>
+    <td class="pl-2 py-4 whitespace-no-wrap ">
+        <div>
+            <input class="rounded-md w-3/4 text-xs leading-5 bg-gray-200" type="text" name="reference">
+        </div>
+    </td>
+    <td class="px-4 py-4 whitespace-no-wrap ">
+        <input class="w-full text-xs rounded-md leading-5" type="text" name="designation">
+     
+    </td>
+    <td class="px-4 py-4 whitespace-no-wrap  text-blue-900 text-sm leading-5">
+        <input class="w-3/4 rounded-md leading-5" type="text">
+    </td>
+    <td class="px-4 py-4 whitespace-no-wrap  text-blue-900 text-sm leading-5">
+        <input class="w-3/4 rounded-md leading-5" type="text">
+    </td>
+    <td class="px-4 py-4 whitespace-no-wrap  text-blue-900 text-sm leading-5">
+        <input class="w-3/4 rounded-md leading-5" type="text">
+    </td>
+    <td class="px-4 py-4 whitespace-no-wrap  text-blue-900 text-sm leading-5">
+        <input class="w-3/4 rounded-md leading-5" type="text">
+    </td>
+    <td class="px-4 py-4 whitespace-no-wrap ">
+        <input class="w-full text-xs rounded-md leading-5" type="text">
+    </td>
+    <td class="px-4 py-4 whitespace-no-wrap text-right  text-sm leading-5">
+        <button type="button"
+                hx-get="{% url 'transactions:addinvoicerow' %}"  
+                hx-target="#invoice-listing"
+                hx-swap="beforeend">
+            <div class="group relative">
+                <svg class="h-10 w-10 fill-[#5e8fc9] hover:fill-[#3d618d]"
+                     viewBox="0 0 24 24"
+                     fill="none"
+                     xmlns="http://www.w3.org/2000/svg">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0">
+                    </g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
+                    </g>
+                    <g id="SVGRepo_iconCarrier">
+                    <path d="M16.19 2H7.81C4.17 2 2 4.17 2 7.81V16.18C2 19.83 4.17 22 7.81 22H16.18C19.82 22 21.99 19.83 21.99 16.19V7.81C22 4.17 19.83 2 16.19 2ZM16 12.75H12.75V16C12.75 16.41 12.41 16.75 12 16.75C11.59 16.75 11.25 16.41 11.25 16V12.75H8C7.59 12.75 7.25 12.41 7.25 12C7.25 11.59 7.59 11.25 8 11.25H11.25V8C11.25 7.59 11.59 7.25 12 7.25C12.41 7.25 12.75 7.59 12.75 8V11.25H16C16.41 11.25 16.75 11.59 16.75 12C16.75 12.41 16.41 12.75 16 12.75Z">
+                    </path>
+                    </g>
+                </svg>
+                <div class=" transition-all ease-in-out duration-500 flex opacity-0 bottom-full bg-slate-100 font-bold text-black text-xs rounded-lg py-2 absolute z-10 group-hover:opacity-100 whitespace-nowrap -left-[180%] px-2 ml-3 pointer-events-none">
+                    Ajouter une ligne
+                </div>
+            </button>
+        </div>
+    </td>
+</tr>
+{% endif %}
+

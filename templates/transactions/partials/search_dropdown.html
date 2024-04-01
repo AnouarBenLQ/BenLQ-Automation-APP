@@ -1,0 +1,46 @@
+<div 
+                  x-show="showSuggestion"                  
+                  x-transition:enter="transition ease-out duration-300"
+                  x-transition:enter-start="transform opacity-0 scale-95"
+                  x-transition:enter-end="transform opacity-100 scale-100"
+                  x-transition:leave="transition ease-in duration-75"
+                  x-transition:leave-start="transform opacity-100 scale-100"
+                  x-transition:leave-end="transform opacity-0 scale-95"
+                  x-on:mouseleave="timeout = setTimeout(() => { showSuggestion = false }, 800)"
+                  class="m-2 relative left-0 top-100 overflow-x-auto rounded-md">
+    <table  class="min-w-full bg-white shadow-md rounded-md"
+           id="suggestionsTable">
+        <thead>
+            <tr class="bg-blue-gray-100 text-gray-700 border-b bg-gradient-to-b from-blue-400 to-white font-semibold rounded-md">
+                <th class="py-3 px-4 text-left text-xs">ID</th>
+                <th class="py-3 px-4 text-left text-xs">Réference</th>
+                <th class="py-3 px-4 text-left text-xs">Désignation</th>
+                <th class="py-3 px-4 text-left text-xs">Stock</th>
+                <th class="py-3 px-4 text-left text-xs">Unité</th>
+                <th class="py-3 px-4 text-left text-xs">Prix d'achat Net HT</th>
+                <th class="py-3 px-4 text-left text-xs">Prix de Vente Net HT</th>
+                <th class="py-3 px-4 text-left text-xs">Prix de Vente TTC</th>
+                
+            </tr>
+        </thead>
+        <tbody class="text-blue-gray-900">
+            {% for product in results %}
+                <tr class="border-b border-blue-gray-200 hover:bg-gradient-to-b from-blue-200 to-white cursor-pointer rounded-md"
+                    hx-post="{% url 'transactions:addinvoicerow' %}"
+                    hx-target="#invoice-listing"
+                    hx-swap="beforeend"
+                    hx-vals='{"product_id" : "{{ product.id }}"}'>
+                    <td class="py-3 px-4 text-xs">{{ product.id }}</td>
+                    <td class="py-3 px-4 text-xs">{{ product.reference }}</td>
+                    <td class="py-3 px-4 text-xs">{{ product.designation }}</td>
+                    <td class="py-3 px-4 text-xs">{{ product.stock }}</td>
+                    <td class="py-3 px-4 text-xs">{{ product.unite_vente }}</td>
+                    <td class="py-3 px-4 text-xs">{{ product.prix_achat_net }}</td>
+                    <td class="py-3 px-4 text-xs">{{ product.prix_1 }}</td>
+                    <td class="py-3 px-4 text-xs">{{ product.prix_ttc_1 }}</td>
+                    
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

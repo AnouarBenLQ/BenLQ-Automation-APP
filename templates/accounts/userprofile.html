@@ -1,6 +1,8 @@
 {% load static %}
 <!DOCTYPE html>
 <html class="h-full bg-gray-100" lang="en">
+  <meta name="description" content="Your meta description here">
+  <meta name="keywords" content="Your meta keywords here">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -599,11 +601,7 @@
                 <a
                   href="#"
                   class="text-gray-300 hover:bg-gray-700 hover:text-white group flex items-center px-2 py-2 text-base font-medium rounded-md"
-                  @click="toggleSubmenu(5)"
-                >
-
-
-
+                  @click="toggleSubmenu(5)">
                 <svg
                   version="1.0"
                   id="Layer_1"
@@ -981,9 +979,9 @@
             <button @click="sidebarOpen=!sidebarOpen">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-8 w-auto"
+                class="h-8 w-auto fill-[rgba(98, 53, 255, 1)]"
                 viewBox="0 0 24 24"
-                style="fill: rgba(98, 53, 255, 1); msfilter: "
+                
                 x-bind:transform="sidebarOpen ? 'rotate(0)matrix(1, 0, 0, 1, 0, 0)' : 'rotate(0)matrix(-1, 0, 0, 1, 0, 0)'"
               >
                 <path
@@ -2015,9 +2013,9 @@
                     <span class="sr-only">Open user menu</span>
                     
                     {% if user.profileImage %}
-                        <img class="h-8 w-8 rounded-full" src="{{ user.profileImage.url }}" alt="User Profile Image">
+                        <img height="" width="" class="h-8 w-8 rounded-full" src="{{ user.profileImage.url }}" alt="User Profile Image">
                       {% else %}
-                        <img class="h-8 w-8 rounded-full" src="{% static 'images/default_profile_pic.png' %}" alt="Default Image">
+                        <img height="" width="" class="h-8 w-8 rounded-full" src="{% static 'images/default_profile_pic.png' %}" alt="Default Image">
                       {% endif %}
                   </button>
                 </div>

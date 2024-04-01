@@ -96,7 +96,7 @@ class Devis(BaseDevis):
     bon_de_commande = models.ForeignKey("Commande", on_delete=models.SET_NULL, null=True, blank=True, related_name='bon_de_commande')
     
 
-class LigneDevis(BaseLigne):
+class LigneDevis(models.Model):
     
     devis = models.ForeignKey(Devis, on_delete=models.CASCADE, related_name='lignes_devis')
     reference= models.CharField(max_length=50, unique=True,blank=True, null=True)
@@ -119,7 +119,7 @@ class LigneDevis(BaseLigne):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f'{self.product.name} - {self.quantity}'
+        return f'{self.product.designation} - {self.quantity}'
     
     
 class Commande(BaseDevis):
