@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("note").innerText = noteValue;
   }
   function handleFormData() {
+    console.log("Form info submitted");
     var clientSelect = document.getElementById("id_form1-client");
     var clientValue = clientSelect.options[clientSelect.selectedIndex].text;
 
@@ -43,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
     //document.getElementById("displayReference").innerText = referenceValue;
     document.getElementById("displaySuiviPar").innerText = suiviParValue;
   }
-  console.log("Wrath Of Chaos");
+  
   
   document
     .getElementById("saleinfoForm")
@@ -66,23 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("myForm").submit();
       document.getElementById("saleinfoForm").submit();
   }
-
-  // Get the mainTable element
-const mainTable = document.getElementById('mainTable');
-
-// Capture all <tr> elements within mainTable
-const trElements = mainTable.getElementsByTagName('tr');
-
-// Loop through each <tr> element
-for (let i = 0; i < trElements.length; i++) {
-    // Add click listener to each <tr> element
-    trElements[i].addEventListener('click', function() {
-        // Your click event handler code goes here
-        console.log('Row clicked:', i); // Example: Log the index of the clicked row
-    });
-}
-
-// Find the closest ancestor <tr> element of table2
+      
  
  
 });
