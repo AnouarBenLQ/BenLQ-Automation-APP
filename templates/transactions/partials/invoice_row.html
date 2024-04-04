@@ -1,5 +1,5 @@
 {% if product %}
-<tr class="myUniqueClass" x-data="{ removeRow() { this.$dispatch('removed'); this.$refs.row.remove();  } }" x-ref="row"  @removed="console.log($event)">
+<tr x-data="{ removeRow() { this.$refs.row.remove(); this.$dispatch('row-removed'); } }" x-ref="row" class="myUniqueClass">
     <td class="pl-2 py-4 whitespace-no-wrap ">
         <div>
             <input class="rounded-md w-3/4 text-xs leading-5 bg-gray-200" type="text" name="reference" value="{{ product.reference }}">
@@ -59,7 +59,7 @@
     </td>
 </tr>
 {% else %}
-<tr class="myUniqueClass" x-data="{ removeRow() { this.$dispatch('removed'); this.$refs.row.remove();  } }" x-ref="row"  @removed="console.log('something')">
+<tr x-data="{ removeRow() { this.$dispatch('removed'); this.$refs.row.remove();} }" x-ref="row" class="myUniqueClass">
     <td class="pl-2 py-4 whitespace-no-wrap ">
         <div>
             <input class="rounded-md w-3/4 text-xs leading-5 bg-gray-200" type="text" name="reference">

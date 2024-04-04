@@ -21,7 +21,6 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("note").innerText = noteValue;
   }
   function handleFormData() {
-    console.log("Form info submitted");
     var clientSelect = document.getElementById("id_form1-client");
     var clientValue = clientSelect.options[clientSelect.selectedIndex].text;
 
@@ -44,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
     //document.getElementById("displayReference").innerText = referenceValue;
     document.getElementById("displaySuiviPar").innerText = suiviParValue;
   }
-  
+  console.log("Wrath Of Chaos");
   
   document
     .getElementById("saleinfoForm")
@@ -63,10 +62,42 @@ document.addEventListener("DOMContentLoaded", function () {
       handleFormData();
     });
 
-    submitForms = function(){
-      document.getElementById("myForm").submit();
-      document.getElementById("saleinfoForm").submit();
-  }
+   submitForms = function() {
+    let form1 = document.getElementById("myForm");
+    let form2 = document.getElementById("saleinfoForm");
+    console.log("something", form1, form2);
+
+    // Combine form data into a FormData object
+    let formData = new FormData(form1);
+    let formData2 = new FormData(form2);
+    
+    // Append form2 data to formData
+    for (let [key, value] of formData2.entries()) {
+        formData.append(key, value);
+    }
+
+    // Send combined form data to the server
+    fetch(form1.action, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json(); // or return response.text() if response is not JSON
+    })
+    .then(data => {
+      if (data && data.data && data.data.redirect_url) {
+        // Redirect to the URL
+        window.location.href = data.data.redirect_url;
+    }
+    })
+    // .catch((error) => {
+    //     console.error('Error:', error);
+    // });
+};
+
       
  
  

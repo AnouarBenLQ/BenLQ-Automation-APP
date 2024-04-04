@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from django.http import HttpResponse
+from django.http import HttpResponse,JsonResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required 
 from django.contrib import messages
@@ -41,8 +41,38 @@ def add_invoice(request):
 
 def new_invoice(request,client, date):
     if request.method == 'POST':
+        print("this is a POST request")
         form1 = InformationDevis(request.POST, prefix='form1')
         form2 = ConditiondeVente(request.POST, prefix='form2')
+        if form1.is_valid() and form2.is_valid():
+            formone = form1.save()  # Save the first part of the form
+            formtwo = form2.save(commit=False)
+            formtwo.pk = formone.pk
+            formtwo.date=formone.date# Use the same primary key
+            formtwo.reference=formone.reference# Use the same primary key
+            formtwo.echeance=formone.echeance# Use the same primary key
+            formtwo.numero=formone.numero# Use the same primary key
+            formtwo.client=formone.client# Use the same primary key
+            formtwo.entreprise=formone.entreprise# Use the same primary key
+            formtwo.suivi_par=formone.suivi_par# Use the same primary key
+            formtwo.save()
+            messages.success(request, f"Devis {formone.numero} est ajouté avec succès !")
+            print('message successful')
+            response_data = {
+                                'message': 'Success',
+                                'data': {
+                                    'key': 'value',
+                                    'redirect_url': reverse('transactions:transactions')  # Inject the URL here
+                                }
+                            }
+    
+    # Return a JSON response with status code 200 OK
+            return JsonResponse(response_data, status=200)
+            
+        else:
+            print(form1.errors,"form one")
+            print(form2.errors,"form two")
+            
         #related_form = LigneDevis(request.POST, prefix='form3')
         
     company=Entreprise.objects.get(pk=1)
@@ -52,7 +82,7 @@ def new_invoice(request,client, date):
     print(date)
     client_obj=Client.objects.get(pk=client)
     print(client_obj)
-    form=InformationDevis(initial={'client': client_obj,'date':initial_date,'suivi_par':request.user},prefix='form1')
+    form=InformationDevis(initial={'client': client_obj,'date':date,'suivi_par':request.user},type_devis='vente',user=request.user,date=date,prefix='form1')
     form_two=ConditiondeVente(prefix='form2')
     form_three=LigneDevisForm(prefix='form3')
     return render(request,"transactions/add_invoice.html",{'date':date,'form':form,'form_two':form_two,'entreprise':company,})
@@ -72,6 +102,3 @@ def search_product(request):
     print(results)
     context={'results':results}
     return render(request,"transactions/partials/search_dropdown.html",context)
-
-def clear_component(request):
-    return HttpResponse("")

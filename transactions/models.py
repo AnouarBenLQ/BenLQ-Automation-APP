@@ -25,6 +25,8 @@ class BaseDevis(models.Model):
         max_length=7,
         choices=DISCOUNT_TYPE_CHOICES,
         default='FIXED',
+        blank=True,
+        null=True
         
     )
     
@@ -32,7 +34,9 @@ class BaseDevis(models.Model):
         max_digits=10,
         decimal_places=2,
         default=0.00,
-        verbose_name="Valeur Remise"
+        verbose_name="Valeur Remise",
+        blank=True,
+        null=True
         
     )
     
@@ -49,11 +53,12 @@ class BaseDevis(models.Model):
     
     
     condition_reglement= models.ForeignKey(ConditionsReglement, on_delete=models.SET_NULL, null=True, blank=True)
-    moyen_de_paiement = models.CharField(max_length=12, choices=[('Espèce', 'Espèce'), ('Prélèvement', 'Prélèvement'),('Chèque', 'Chèque'), ('Virement', 'Virement'),('Versement', 'Versement'),('Autre','Autre')],default='Autre')
+    moyen_de_paiement = models.CharField(max_length=12, choices=[('Espèce', 'Espèce'), ('Prélèvement', 'Prélèvement'),('Chèque', 'Chèque'), ('Virement', 'Virement'),('Versement', 'Versement'),('Autre','Autre')],default='Autre',blank=True)
     adresse_de_livraison = models.CharField(max_length=100,blank=True,null=True)
     date_livraison = models.DateField(blank=True,null=True)
     condition_livraison = models.CharField(max_length=100,blank=True,null=True)
-    note=models.TextField(blank=True,null=True)
+    note=models.TextField(default="Aucune")
+    
     
     class Meta:
         abstract = True
